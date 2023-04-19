@@ -1,5 +1,6 @@
 #include "loginform.h"
 #include "ui_loginform.h"
+#include "mainwindow.h"
 
 LoginForm::LoginForm(QWidget *parent) :
     QWidget(parent),
@@ -28,5 +29,7 @@ void LoginForm::newUserForm()
 
 void LoginForm::enterAsGuest()
 {
-
+    MainWindow *mainWindow = new MainWindow();
+    mainWindow->setGuestForm();
+    mainWindow->show();
 }

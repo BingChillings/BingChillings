@@ -76,3 +76,6 @@ compile_commands.json
 *.swp
 debug/
 saves/
+
+# Other
+.DS_Store
