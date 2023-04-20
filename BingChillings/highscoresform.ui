@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HighScoresForm</class>
+ <widget class="QWidget" name="HighScoresForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>770</width>
+    <height>461</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+font-size:24px;
+background:rgb(163, 96, 240);
+}
+
+QToolButton
+{
+font-size: 30px;
+border: 1px white;
+border-radius: 15px;
+border-style: solid;
+background:rgb(255, 141, 144);
+color: #333;
+}
+
+
+QFrame
+{
+background:#333;
+border-radius: 15px;
+}
+
+QPushButton
+{
+border: 1px rgb(255, 141, 144);
+background:rgb(255, 141, 144);
+border-radius:9px;
+color: #333;
+}
+QPushButton:hover
+{
+border: 1px rgba(255, 138, 145, 123);
+background:rgba(255, 138, 145, 123);
+border-radius:9px;
+color: #333;
+}
+
+QLineEdit
+{
+background:transparent;
+border:none;
+color:#717072;
+}
+
+QTextEdit
+{
+background:transparent;
+border:none;
+color:#717072;
+}</string>
+  </property>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>751</width>
+     <height>431</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>390</y>
+      <width>231</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Return to Game</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QToolButton" name="toolButton">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>10</y>
+     <width>331</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Score Lable</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -2,12 +2,16 @@
 #include "ui_loginform.h"
 
 #include "mainwindow.h"
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 #include "newuserwindow.h"
 #include "init.h"
 
 >>>>>>> Stashed changes
+=======
+#include "newuserwindow.h"
+>>>>>>> main
 
 LoginForm::LoginForm(QWidget *parent) :
     QWidget(parent),
@@ -38,7 +42,8 @@ void LoginForm::validateUsernamePassword()
 
 void LoginForm::newUserForm()
 {
-
+    NewUserWindow *newUserWindow = new NewUserWindow();
+    newUserWindow->show();
 }
 
 void LoginForm::enterAsGuest()

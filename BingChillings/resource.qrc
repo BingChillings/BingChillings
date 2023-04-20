@@ -7,6 +7,11 @@
         <file>images/plane.png</file>
         <file>images/dog.png</file>
         <file>images/tree.png</file>
+        <file>images/heart.png</file>
+        <file>images/wheat.png</file>
+        <file>images/star.png</file>
+        <file>images/cat.png</file>
+        <file>images/monster.png</file>
     </qresource>
     <qresource prefix="/JSON">
         <file>JSON/users.json</file>
