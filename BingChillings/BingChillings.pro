@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    init.cpp \
     ball.cpp \
     brick.cpp \
     gamescene.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
     user.cpp
 
 HEADERS += \
+    init.h \
     ball.h \
     brick.h \
     gamescene.h \
