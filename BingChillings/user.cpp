@@ -21,7 +21,7 @@ User::User( QString &firstName, QString &lastName, QDate &dateOfBirth, QString &
             validateUsername(username);
             username_ = username;
         } catch (const std::runtime_error &e) {
-            qDebug() << "Invalid password:" << e.what();
+            qDebug() << "Error:" << e.what();
         }
     }
     // If reading from file then password is has already been validated and hashed
