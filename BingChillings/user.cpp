@@ -27,6 +27,7 @@ User::User( QString &firstName, QString &lastName, QDate &dateOfBirth, QString &
     // If reading from file then password is has already been validated and hashed
     else{
         password_ = password;
+        username_ = username;
     }
 }
 
@@ -204,7 +205,7 @@ void validateUsername(QString &username) {
 }
 
 //check password at login
-bool checkPasswor(QString &password, User &user){
+bool checkPassword(QString &password, User &user){
     if (user.password() != passwordHash(password) ){
         return false;
     }else {
