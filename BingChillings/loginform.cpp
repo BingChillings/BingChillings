@@ -32,4 +32,5 @@ void LoginForm::enterAsGuest()
     MainWindow *mainWindow = new MainWindow();
     mainWindow->setGuestForm();
     mainWindow->show();
+    this->close();
 }
