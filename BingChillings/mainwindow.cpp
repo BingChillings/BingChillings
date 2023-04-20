@@ -1,7 +1,6 @@
-#include "gamescene.h"
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QGraphicsView>
 
 const int WINDOW_WIDTH = 1000;
 const int WINDOW_HEIGHT = 750;
@@ -20,14 +19,22 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::playButtonPressed(){
-    GameScene* game_scene = new GameScene();
-    QGraphicsView* view = new QGraphicsView();
+    game_scene = new GameScene();
+    view = new QGraphicsView();
     view->setScene(game_scene);
     view->setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     view->setHorizontalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     view->setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
-
+    connect(game_scene, &GameScene::end_game, this, &MainWindow::handleGameEnd);
     view->show();
+}
+
+//slot for end game
+void MainWindow::handleGameEnd(QString type, int lives, int score)
+{
+    delete view;
+    delete game_scene;
+    //update text box once it's available.
 }
 
 void MainWindow::highScoreButtonPressed(){
