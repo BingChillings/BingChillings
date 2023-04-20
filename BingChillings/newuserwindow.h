@@ -15,6 +15,9 @@ public:
     explicit NewUserWindow(QWidget *parent = nullptr);
     ~NewUserWindow();
 
+    void validateUsername(QString &username);
+    void validatePassword(QString &password);
+
 private:
     Ui::NewUserWindow *ui;
 };

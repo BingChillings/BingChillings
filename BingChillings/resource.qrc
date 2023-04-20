@@ -8,4 +8,7 @@
         <file>images/dog.png</file>
         <file>images/tree.png</file>
     </qresource>
+    <qresource prefix="/JSON">
+        <file>JSON/users.json</file>
+    </qresource>
 </RCC>

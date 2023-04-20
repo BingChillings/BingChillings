@@ -6,17 +6,13 @@
 
 
 
-Init::Init(QVector<User> &temp):users(temp)
-{
-
-}
-
+Init::Init(){}
 
 
 
 void Init::readFromJSON()
 {
-    QFile file("users.json");
+    QFile file(":/JSON/JSON/users.json");
     QJsonArray jsonArray;
 
     if (file.open(QIODevice::ReadOnly)) {
@@ -72,64 +68,17 @@ QString Init::passwordHash(QString &password)
     return hashString;
 }
 
-void Init::validatePassword(QString &password, bool signupOrLogin)
-{
-    if (password.length() < 8)
-        throw std::runtime_error("Password must be at least 8 characters long.");
 
-    bool hasCapitalLetter = false;
-    bool hasSpecialCharacter = false;
-    bool hasSpace = false;
-
-    for (QChar &ch : password) {
-        if (ch.isUpper())
-            hasCapitalLetter = true;
-
-        if (ch.isSpace())
-            hasSpace = true;
-
-        if (!ch.isLetterOrNumber())
-            hasSpecialCharacter = true;
-    }
-
-    // True: sign-up
-    // False: Login
-    if (signupOrLogin){
-        // Write error message to to sign-up page
-        if (!hasCapitalLetter)
-            throw std::runtime_error("Password must have at least one capital letter.");
-
-        if (!hasSpecialCharacter)
-            throw std::runtime_error("Password must have at least one special character.");
-
-        if (hasSpace)
-            throw std::runtime_error("Password must not contain any spaces.");
-    }
-    else {
-        // Write error message to login page
-        if (!hasCapitalLetter)
-            throw std::runtime_error("Password must have at least one capital letter.");
-
-        if (!hasSpecialCharacter)
-            throw std::runtime_error("Password must have at least one special character.");
-
-        if (hasSpace)
-            throw std::runtime_error("Password must not contain any spaces.");
-    }
-
-}
 
 //check password at login
-bool Init::checkPassword(QString &password, User &user, bool signupOrLogin)
+bool Init::checkPassword(QString &password, User &user)
 {
-    if ( user.password() != passwordHash(password) ) {
-        if (signupOrLogin){
-            //Write error msg to the sign-up page
-        }
-        else {
-            //Write error msg to the login page
-        }
-        return false;
-    }
+    if ( user.password() != passwordHash(password) ) return false;
     else return true;
 }
+
+
+
+
+
+

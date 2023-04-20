@@ -7,14 +7,14 @@
 class Init
 {
 public:
-    Init(QVector<User> &temp);
+    Init();
 
-    QVector<User> users;
+    static QVector<User> users;
 
     void readFromJSON();
-    void validatePassword(QString &password, bool signupOrLogin);
-    bool checkPassword(QString &password,User &user, bool signupOrLogin);
-    QString passwordHash(QString &password);
+
+    static bool checkPassword(QString &password,User &user);
+    static QString passwordHash(QString &password);
 
 signals:
 
