@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>NewUserWindow</class>
- <widget class="QMainWindow" name="NewUserWindow">
+ <widget class="QWidget" name="NewUserWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,121 +11,315 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Form</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QFormLayout" name="formLayout">
-    <item row="0" column="0">
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="passwordInput">
-        <property name="echoMode">
-         <enum>QLineEdit::PasswordEchoOnEdit</enum>
-        </property>
-        <property name="placeholderText">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="brithDateLabel">
-        <property name="text">
-         <string>birth date:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="lastNameInput"/>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="userNameInput"/>
-      </item>
-      <item row="5" column="1">
-       <widget class="QDateEdit" name="dateEdit">
-        <property name="accelerated">
-         <bool>false</bool>
-        </property>
-        <property name="displayFormat">
-         <string>M/d/yy</string>
-        </property>
-        <property name="calendarPopup">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" colspan="3">
-       <widget class="QLabel" name="newUserWindowHeader">
-        <property name="font">
-         <font>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::RightToLeft</enum>
-        </property>
-        <property name="text">
-         <string>              New User Info</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="firstNameInput"/>
-      </item>
-      <item row="6" column="0" colspan="2">
-       <widget class="QComboBox" name="comboBoxGender">
-        <property name="placeholderText">
-         <string>gender</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="passwordLabel">
-        <property name="text">
-         <string>password:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="0" colspan="2">
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>sumbit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="firstNameLabel">
-        <property name="text">
-         <string>first name:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="userNameLabel">
-        <property name="text">
-         <string>username:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="LastNameLabel">
-        <property name="text">
-         <string>last name:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0" colspan="2">
-       <widget class="QComboBox" name="comboBoxPofilePic">
-        <property name="placeholderText">
-         <string>pofile picture</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
+  <property name="styleSheet">
+   <string notr="true">*{
+font-size:18px;
+color:rgb(208, 208, 208);
+background:rgb(163, 96, 240);
+}
+
+QLabel
+{
+font-size: 30px;
+}
+
+#errorMessageLabel
+{
+background:transparent;
+color: rgb(255, 0, 0);
+font-size: 16px;
+}
+
+QFrame
+{
+background:#333;
+border-radius: 15px;
+}
+
+QPushButton
+{
+border: 1px rgb(255, 141, 144);
+background:rgb(255, 141, 144);
+border-radius:9px;
+color: #333;
+}
+QPushButton:hover
+{
+border: 1px rgba(255, 138, 145, 123);
+background:rgba(255, 138, 145, 123);
+border-radius:9px;
+color: #333;
+}
+#playButton
+{
+ border-radius:100px;
+ border-color: red;
+ max-width:400px;
+ max-height:200px;
+ min-width:400px;
+ min-height:200px;
+}
+
+QToolButton
+{
+ background-color: rgb(255, 141, 144);
+ border-width:1px;
+ border-radius:50px;
+ border-color: red;
+ max-width:100px;
+ max-height:100px;
+ min-width:100px;
+ min-height:100px;
+}
+
+QLineEdit
+{
+background:transparent;
+border:none;
+color:#717072;
+border-bottom:1px solid #717072;
+}
+
+QTextEdit
+{
+background:transparent;
+border:none;
+color:#111;
+}
+
+QDateEdit
+{
+background: #333;
+font-size: 16px;
+color:#717072;
+}
+
+QGroupBox
+{
+background: transparent;
+border:none;
+color:#717072;
+}
+
+QComboBox
+{
+background: transparent;
+border:none;
+color:#717072;
+}</string>
+  </property>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>70</y>
+     <width>601</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QLineEdit" name="firstNameEdit">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>80</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>First name</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lastNameEdit">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>80</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>Last name</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="usernameEdit">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>130</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>Username</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="passwordEdit">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>130</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
+    <property name="placeholderText">
+     <string>Password</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="birthdayBox">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>40</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Birthday</string>
+    </property>
+    <widget class="QDateEdit" name="birthdayEdit">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>163</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="displayFormat">
+      <string>MM/dd/yyyy</string>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QComboBox" name="genderComboBox">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>110</y>
+      <width>171</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>Gender</string>
+    </property>
+   </widget>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolButton" name="toolButton">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>0</y>
+     <width>100</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/images/ice-cream.png</normaloff>:/images/images/ice-cream.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>50</width>
+     <height>50</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="iconBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>270</y>
+     <width>621</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QToolButton" name="toolButton_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/images/ice-cream.png</normaloff>:/images/images/ice-cream.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton_3">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>10</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/images/ice-cream.png</normaloff>:/images/images/ice-cream.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
+  </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

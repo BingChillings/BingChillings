@@ -1,13 +1,13 @@
 #ifndef NEWUSERWINDOW_H
 #define NEWUSERWINDOW_H
 
-#include <QMainWindow>
+#include <QWidget>
 
 namespace Ui {
 class NewUserWindow;
 }
 
-class NewUserWindow : public QMainWindow
+class NewUserWindow : public QWidget
 {
     Q_OBJECT
 
