@@ -6,6 +6,7 @@ NewUserWindow::NewUserWindow(QWidget *parent) :
     ui(new Ui::NewUserWindow)
 {
     ui->setupUi(this);
+<<<<<<< Updated upstream
     ui->comboBoxGender->addItem("Male");
     ui->comboBoxGender->addItem("Female");
 
@@ -14,10 +15,21 @@ NewUserWindow::NewUserWindow(QWidget *parent) :
     ui->comboBoxPofilePic->addItem("image3");
     ui->comboBoxPofilePic->addItem("image4");
     ui->comboBoxPofilePic->addItem("image5");
+=======
+    ui->genderComboBox->addItem("Male");
+    ui->genderComboBox->addItem("Female");
+    ui->genderComboBox->addItem("Other");
+>>>>>>> Stashed changes
 
 }
 
 NewUserWindow::~NewUserWindow()
 {
     delete ui;
+}
+
+void setNewUserInfo()
+{
+
+
 }
