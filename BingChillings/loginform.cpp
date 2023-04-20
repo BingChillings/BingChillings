@@ -20,6 +20,9 @@ LoginForm::~LoginForm()
 
 void LoginForm::validateUsernamePassword()
 {
+    QString userName = ui->usernameLineEdit->text();
+    QString passWord = ui->passwordLineEdit->text();
+
 
 }
 

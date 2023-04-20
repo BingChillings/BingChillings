@@ -6,6 +6,8 @@ NewUserWindow::NewUserWindow(QWidget *parent) :
     ui(new Ui::NewUserWindow)
 {
     ui->setupUi(this);
+    ui->comboBoxGender->addItem("Male");
+    ui->comboBoxGender->addItem("Female");
 }
 
 NewUserWindow::~NewUserWindow()
