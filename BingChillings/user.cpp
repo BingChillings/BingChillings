@@ -63,7 +63,7 @@ QVector<int> User::scores(){
     return scores_;
 }
 
-QVector<User> read(){
+QVector<User> User::read(){
     QVector<User> users;
 
     QFile file("users.json");
@@ -107,7 +107,7 @@ QVector<User> read(){
     return users;
 }
 
-void write(QVector<User> &users){
+void User::write(QVector<User> &users){
 
     QJsonArray jsonArray;
 
@@ -138,7 +138,7 @@ void write(QVector<User> &users){
     }
 }
 
-QString passwordHash(QString &password) {
+QString User::passwordHash(QString &password) {
     QByteArray passwordBytes = password.toUtf8();
 
     QCryptographicHash hasher(QCryptographicHash::Sha256);
@@ -150,7 +150,7 @@ QString passwordHash(QString &password) {
     return hashString;
 }
 
-void validatePassword(QString &password){
+void User::validatePassword(QString &password){
     if (password.length() < 8) {
         throw std::runtime_error("Password must be at least 8 characters long.");
     }
@@ -185,7 +185,7 @@ void validatePassword(QString &password){
 
 }
 
-void validateUsername(QString &username) {
+void User::validateUsername(QString &username) {
     if (username.length() < 3) {
         throw std::runtime_error("Username must be at least 3 characters long.");
     }
@@ -205,7 +205,7 @@ void validateUsername(QString &username) {
 }
 
 //check password at login
-bool checkPassword(QString &password, User &user){
+bool User::checkPassword(QString &password, User &user){
     if (user.password() != passwordHash(password) ){
         return false;
     }else {
