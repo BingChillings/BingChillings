@@ -1,22 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <widget class="QWidget" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>833</width>
+    <height>457</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Form</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
-  <widget class="QStatusBar" name="statusbar"/>
+  <property name="styleSheet">
+   <string notr="true">*{
+font-size:24px;
+background:rgb(163, 96, 240);
+}
+
+QLabel
+{
+font-size: 30px;
+}
+
+#errorMessageLabel
+{
+background:transparent;
+color: rgb(255, 0, 0);
+font-size: 16px;
+}
+
+QFrame
+{
+background:#333;
+border-radius: 15px;
+}
+
+QPushButton
+{
+border: 1px rgb(255, 141, 144);
+background:rgb(255, 141, 144);
+border-radius:9px;
+color: #333;
+}
+QPushButton:hover
+{
+border: 1px rgba(255, 138, 145, 123);
+background:rgba(255, 138, 145, 123);
+border-radius:9px;
+color: #333;
+}
+#playButton
+{
+ border-radius:100px;
+ border-color: red;
+ max-width:400px;
+ max-height:200px;
+ min-width:400px;
+ min-height:200px;
+}
+
+QToolButton
+{
+ background-color: rgb(255, 141, 144);
+ border-width:1px;
+ border-radius:50px;
+ border-color: red;
+ max-width:100px;
+ max-height:100px;
+ min-width:100px;
+ min-height:100px;
+}
+
+QLineEdit
+{
+background:transparent;
+border:none;
+color:#717072;
+border-bottom:1px solid #717072;
+}
+
+QTextEdit
+{
+background:transparent;
+border:none;
+color:#111;
+}</string>
+  </property>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>160</y>
+     <width>241</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QLabel" name="usernameLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>username</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QToolButton" name="userIcon">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>110</y>
+     <width>100</width>
+     <height>100</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/images/ice-cream.png</normaloff>:/images/images/ice-cream.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>50</width>
+     <height>50</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="highScoresButton">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>120</y>
+     <width>401</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>High Scores</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="leaderBoardButton">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>60</y>
+     <width>401</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Leader Board</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="playButton">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>190</y>
+     <width>400</width>
+     <height>200</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Play</string>
+   </property>
+  </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>
