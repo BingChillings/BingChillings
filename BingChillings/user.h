@@ -30,6 +30,7 @@ public:
     void validateUsername(QString &username);
 //    bool checkPassword(QString &password, User &user);
     bool checkPassword(QString &password, User &user);
+
 private:
 
     QString firstName_;

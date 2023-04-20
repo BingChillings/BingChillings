@@ -14,7 +14,6 @@ NewUserWindow::NewUserWindow(QWidget *parent) :
     ui->comboBoxPofilePic->addItem("image3");
     ui->comboBoxPofilePic->addItem("image4");
     ui->comboBoxPofilePic->addItem("image5");
-
 }
 
 NewUserWindow::~NewUserWindow()
