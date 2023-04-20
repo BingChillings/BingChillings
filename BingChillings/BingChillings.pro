@@ -10,23 +10,29 @@ CONFIG += c++17
 
 SOURCES += \
     init.cpp \
+    ball.cpp \
+    brick.cpp \
+    gamescene.cpp \
     loginform.cpp \
     main.cpp \
     mainwindow.cpp \
-    user.cpp \
-    newuserwindow.cpp
+    paddle.cpp \
+    user.cpp
 
 HEADERS += \
     init.h \
+    ball.h \
+    brick.h \
+    gamescene.h \
     loginform.h \
     mainwindow.h \
-    user.h \
-    newuserwindow.h
+    paddle.h \
+    user.h
 
 FORMS += \
+    newuserwindow.ui \
     loginform.ui \
-    mainwindow.ui \
-    newuserwindow.ui
+    mainwindow.ui
 
 
 # Default rules for deployment.
