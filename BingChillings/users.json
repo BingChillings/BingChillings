@@ -1,9 +1,13 @@
 {
-    "dateOfBirth": "2000-01-01",
-    "firstName": "t",
-    "gender": "Female",
-    "lastName": "f",
-    "password": "b4849287e2137d2e27f7b3dde1872bbaf3364a9812226e509ba658400a99e3a1",
-    "profilePictureFileName": ":/images/images/ice-cream.png",
-    "username": "thomasford"
+    "yt": [
+        {
+            "dateOfBirth": "2000-01-01",
+            "firstName": "yutian",
+            "gender": "Male",
+            "lastName": "qin",
+            "password": "b4849287e2137d2e27f7b3dde1872bbaf3364a9812226e509ba658400a99e3a1",
+            "profilePictureFileName": ":/images/images/dog.png",
+            "username": "yt"
+        }
+    ]
 }

@@ -87,11 +87,6 @@ void User::write()
     userObject["password"] = this->password();
 //    userObject["scores"] = QJsonArray::fromVector(QVector<QVariant>::fromList(this->scores()));
 
-//    QString dir_path;
-//    QDir dir(QCoreApplication::applicationDirPath());
-//    dir_path = dir.relativeFilePath("../../");
-//    QString filename = QFileDialog::getOpenFileName(this,"MSD",dir_path,tr())
-
     QFile jsonFile("/Users/yutianqin/bingChilling/BingChillings/BingChillings/users.json");
     if (!QFile::exists(jsonFile.fileName())) {
         qDebug() << "write: JSON file does not exist";
@@ -101,12 +96,30 @@ void User::write()
         qDebug() << "write: User does not have write permission for JSON file";
         return;
     }
-    if (!jsonFile.open(QIODevice::WriteOnly)) {
+    if (!jsonFile.open(QIODevice::ReadWrite|QIODevice::Text|QIODevice::Append)) {
         qDebug() << "write: Failed to open JSON file for writing" << jsonFile.errorString();
         return;
     }
-    QJsonDocument jsonDocument(userObject);
-    jsonFile.write(jsonDocument.toJson());
+
+//    QJsonDocument jsonDocument(userObject);
+//    jsonFile.write(jsonDocument.toJson());
+//    jsonFile.close();
+
+
+    // Read the existing JSON data from the file
+    QJsonDocument doc = QJsonDocument::fromJson(jsonFile.readAll());
+
+    // Get the root JSON object as a QJsonObject
+    QJsonObject jsonObj = doc.object();
+
+
+    // Add the new object to the existing JSON data as an array element
+    QJsonArray jsonArray = jsonObj[this->username()].toArray();
+    jsonArray.append(userObject);
+    jsonObj[this->username()] = jsonArray;
+
+    jsonFile.seek(0);
+    jsonFile.write(QJsonDocument(jsonObj).toJson());
     jsonFile.close();
 }
 

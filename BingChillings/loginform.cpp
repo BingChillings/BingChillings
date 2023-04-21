@@ -35,6 +35,7 @@ LoginForm::~LoginForm()
 
 void LoginForm::validateUsernamePassword()
 {
+    bool correct = false;
     QString userName = ui->usernameLineEdit->text();
     QString passWord = ui->passwordLineEdit->text();
 
@@ -46,16 +47,21 @@ void LoginForm::validateUsernamePassword()
                 ui->errorMessageLabel->setText("Wrong password");
                 return;
             }
+            else {
+                correct = true;
+            }
         } else {
             ui->errorMessageLabel->setText("Cannot find the user");
             return;
         }
     }
 
-    MainWindow *mainWindow = new MainWindow();
-    qDebug() << user.profilePictureFileName();
-    mainWindow->setUserForm(user.profilePictureFileName(), user.username());
-    mainWindow->show();
+    if ( correct ) {
+        MainWindow *mainWindow = new MainWindow();
+        qDebug() << user.profilePictureFileName();
+        mainWindow->setUserForm(user.profilePictureFileName(), user.username());
+        mainWindow->show();
+    }
 }
 
 

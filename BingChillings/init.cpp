@@ -23,11 +23,7 @@ QVector<User> Init::readFromJSON()
     if (file.open(QIODevice::ReadOnly)) {
         QByteArray fileContent = file.readAll();
         QJsonDocument jsonDocument = QJsonDocument::fromJson(fileContent);
-
-//        if (jsonDocument.isNull()){
-//            qDebug() << "readFromJSON: This file is null.";
-//        }
-
+//        if (jsonDocument.isNull()) qDebug() << "readFromJSON: This file is null.";
         jsonArray = jsonDocument.array();
     }
     else {
