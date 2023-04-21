@@ -3,6 +3,12 @@
 
 #include "mainwindow.h"
 #include "newuserwindow.h"
+#include "init.h"
+
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+
 
 
 LoginForm::LoginForm(QWidget *parent) :
@@ -10,6 +16,9 @@ LoginForm::LoginForm(QWidget *parent) :
     ui(new Ui::LoginForm)
 {
     ui->setupUi(this);
+
+    this->users = Init::users;
+
     connect(ui->submitPushButton, &QPushButton::clicked, this, &LoginForm::validateUsernamePassword);
     connect(ui->newUserButton, &QPushButton::clicked, this, &LoginForm::newUserForm);
     connect(ui->guestButton, &QPushButton::clicked, this, &LoginForm::enterAsGuest);
@@ -20,16 +29,38 @@ LoginForm::~LoginForm()
     delete ui;
 }
 
+
+
+
+
 void LoginForm::validateUsernamePassword()
 {
-//    QString userName = ui->usernameLineEdit->text();
-//    QString passWord = ui->passwordLineEdit->text();
-//    for ( int i = 0; i < Init::users.size(); i++ ) {
-//        if ( Init::users.at(i).username() == tempName ) {
+    QString userName = ui->usernameLineEdit->text();
+    QString passWord = ui->passwordLineEdit->text();
 
-//        }
-//    }
+    Init *init = new Init();
+    QVector<User> users = init->readFromJSON();
+    User user;
+    for ( User &u : users ) {
+        if ( u.username() == userName ){
+            user = u;
+            if ( !Init::checkPassword(passWord, u) ) {
+                ui->errorlineEdit->setText("Wrong password");
+                return;
+            }
+        } else {
+            ui->errorlineEdit->setText("Cannot find the user");
+            return;
+        }
+    }
+
+    MainWindow *mainWindow = new MainWindow();
+    mainWindow->setUserForm(user.profilePictureFileName(), user.username());
+    mainWindow->show();
 }
+
+
+
 
 void LoginForm::newUserForm()
 {

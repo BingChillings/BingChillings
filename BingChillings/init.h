@@ -9,11 +9,11 @@ class Init
 public:
     Init();
 
-    QVector<User> users;
+    static QVector<User> users;
 
-    void readFromJSON();
+    QVector<User> readFromJSON();
 
-    static bool checkPassword(QString &password,User &user);
+    static bool checkPassword(QString &password, const User &user);
     static QString passwordHash(QString &password);
 
 signals:

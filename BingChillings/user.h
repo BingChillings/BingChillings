@@ -12,18 +12,21 @@
 class User
 {
 public:
-    User( QString &firstName, QString &lastName, QDate &dateOfBirth, QString &gender, QString &profilePictureFileName, QString &username, QString &password, QVector<int> &arrayOfInts , bool hashNeeded);
+    User();
+    User(QString &firstName, QString &lastName, QDate &dateOfBirth,
+         QString &gender, QString &profilePictureFileName, QString &username,
+         QString &password, QVector<int> &arrayOfInts , bool hashNeeded);
 
     QString firstName();
     QString lastName();
     QDate dateOfBirth();
     QString gender();
     QString profilePictureFileName();
-    QString username();
-    QString password();
+    QString username() const;
+    QString password() const;
     QVector<int> scores();
 
-    void write(QVector<User> &users);
+    void write();
 
 private:
 

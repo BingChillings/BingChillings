@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>256</width>
-    <height>438</height>
+    <width>651</width>
+    <height>513</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -601,7 +601,7 @@ QPushButton:clicked
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_13">
+   <widget class="QPushButton" name="wheatIconButton">
     <property name="geometry">
      <rect>
       <x>530</x>
@@ -631,7 +631,7 @@ QPushButton:clicked
     </property>
    </widget>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="submitPushButton">
    <property name="geometry">
     <rect>
      <x>180</x>
