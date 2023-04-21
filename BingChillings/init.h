@@ -13,9 +13,6 @@ public:
 
     QVector<User> readFromJSON();
 
-    static bool checkPassword(QString &password, const User &user);
-    static QString passwordHash(QString &password);
-
 signals:
 
 };

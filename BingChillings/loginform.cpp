@@ -45,11 +45,11 @@ void LoginForm::validateUsernamePassword()
         if ( u.username() == userName ){
             user = u;
             if ( !Init::checkPassword(passWord, u) ) {
-                ui->errorlineEdit->setText("Wrong password");
+                ui->errorMessageLabel->setText("Wrong password");
                 return;
             }
         } else {
-            ui->errorlineEdit->setText("Cannot find the user");
+            ui->errorMessageLabel->setText("Cannot find the user");
             return;
         }
     }
@@ -73,4 +73,5 @@ void LoginForm::enterAsGuest()
     MainWindow *mainWindow = new MainWindow();
     mainWindow->setGuestForm();
     mainWindow->show();
+    this->close();
 }

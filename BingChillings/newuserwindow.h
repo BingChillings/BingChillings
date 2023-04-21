@@ -21,7 +21,7 @@ public:
     User user;
     QString profilePicName;
 
-    void backToLogin();
+    QString passwordHash(QString &password);
 
     void dogProfilePic();
     void carProfilePic();
@@ -35,9 +35,14 @@ public:
     void sunProfilePic();
     void treeProfilePic();
     void wheatProfilePic();
+    void validateFields();
+
+private slots:
+    void resetFields();
 
 private:
     Ui::NewUserWindow *ui;
+    void setupGenderBox();
 };
 
 #endif // NEWUSERWINDOW_H

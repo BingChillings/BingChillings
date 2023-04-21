@@ -59,30 +59,6 @@ QVector<User> Init::readFromJSON()
 
 
 
-// Password validation and checking
-
-QString Init::passwordHash(QString &password)
-{
-    QByteArray passwordBytes = password.toUtf8();
-
-    QCryptographicHash hasher(QCryptographicHash::Sha256);
-    hasher.addData(passwordBytes);
-    QByteArray hash = hasher.result();
-
-    QString hashString = hash.toHex();
-
-    return hashString;
-}
-
-
-
-//check password at login
-bool Init::checkPassword(QString &password, const User &user)
-{
-    if ( user.password() != passwordHash(password) ) return false;
-    else return true;
-}
-
 
 
 

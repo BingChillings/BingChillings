@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    highscoresform.cpp \
     init.cpp \
     ball.cpp \
     brick.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
     user.cpp
 
 HEADERS += \
+    highscoresform.h \
     init.h \
     ball.h \
     brick.h \
@@ -33,6 +35,7 @@ HEADERS += \
 
 FORMS += \
     newuserwindow.ui \
+    highscoresform.ui \
     loginform.ui \
     mainwindow.ui
 

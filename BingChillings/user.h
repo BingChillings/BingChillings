@@ -26,7 +26,15 @@ public:
     QString password() const;
     QVector<int> scores();
 
+
     void write();
+//    QVector<User> read();
+//    QString passwordHash(QString &password);
+//    void validatePassword(QString &password);
+//    void validateUsername(QString &username);
+////    bool checkPassword(QString &password, User &user);
+//    bool checkPassword(QString &password, User &user);
+
 
 private:
 
