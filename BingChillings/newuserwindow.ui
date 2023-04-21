@@ -248,9 +248,9 @@ color:#717072;
    <widget class="QLineEdit" name="errorLineEdit">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>10</x>
       <y>170</y>
-      <width>381</width>
+      <width>421</width>
       <height>21</height>
      </rect>
     </property>

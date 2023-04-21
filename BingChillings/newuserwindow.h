@@ -15,8 +15,9 @@ public:
     explicit NewUserWindow(QWidget *parent = nullptr);
     ~NewUserWindow();
 
+    void validateFields();
+
 private slots:
-    void fillUserInfo();
     void resetFields();
 
 
