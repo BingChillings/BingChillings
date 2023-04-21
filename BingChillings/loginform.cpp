@@ -2,7 +2,7 @@
 #include "ui_loginform.h"
 
 #include "mainwindow.h"
-//#include "newuserwindow.h"
+#include "newuserwindow.h"
 
 
 LoginForm::LoginForm(QWidget *parent) :
@@ -33,7 +33,8 @@ void LoginForm::validateUsernamePassword()
 
 void LoginForm::newUserForm()
 {
-
+    NewUserWindow *newUserWindow = new NewUserWindow();
+    newUserWindow->show();
 }
 
 void LoginForm::enterAsGuest()
