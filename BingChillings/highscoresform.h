@@ -2,6 +2,7 @@
 #define HIGHSCORESFORM_H
 
 #include <QWidget>
+#include <QVector>
 
 namespace Ui {
 class HighScoresForm;
@@ -13,10 +14,16 @@ class HighScoresForm : public QWidget
 
 public:
     explicit HighScoresForm(QWidget *parent = nullptr);
+
+    void setScoreBoard(QVector<int> scores, bool user);
+
     ~HighScoresForm();
 
 private:
     Ui::HighScoresForm *ui;
+
+private slots:
+    void returnButtonPressed();
 };
 
 #endif // HIGHSCORESFORM_H
