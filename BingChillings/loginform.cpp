@@ -38,13 +38,11 @@ void LoginForm::validateUsernamePassword()
     QString userName = ui->usernameLineEdit->text();
     QString passWord = ui->passwordLineEdit->text();
 
-    Init *init = new Init();
-    QVector<User> users = init->readFromJSON();
     User user;
     for ( User &u : users ) {
         if ( u.username() == userName ){
             user = u;
-            if ( !Init::checkPassword(passWord, u) ) {
+            if ( !u.checkPassword(passWord, u) ) {
                 ui->errorMessageLabel->setText("Wrong password");
                 return;
             }

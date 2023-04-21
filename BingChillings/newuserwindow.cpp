@@ -1,6 +1,5 @@
 #include "newuserwindow.h"
 #include "ui_newuserwindow.h"
-#include "loginform.h"
 #include "init.h"
 #include <QPushButton>
 #include <QCryptographicHash>
@@ -160,11 +159,10 @@ void NewUserWindow::validateFields(){
 
     birthday = ui->birthdayEdit->date();
     QVector<int> scores = {};
-    bool hashNeeded = true;
 
     QString hashedPassword = passwordHash(password);
     if ( hasCapitalLetter && hasSpecialCharacter && !hasSpace ) {
-        User newUser(firstname, lastname, birthday, gender, profilePictureFileName, username, hashedPassword, scores, hashNeeded);
+        User newUser(firstname, lastname, birthday, gender, profilePictureFileName, username, hashedPassword, scores);
         this->user = newUser;
 
         // Write this newly created user to the JSON file

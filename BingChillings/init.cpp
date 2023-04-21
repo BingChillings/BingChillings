@@ -3,6 +3,8 @@
 #include <QCryptographicHash>
 #include "init.h"
 
+
+
 QVector<User> Init::users;
 
 
@@ -12,11 +14,10 @@ Init::Init()
 }
 
 
-
 QVector<User> Init::readFromJSON()
 {
     QVector<User> users;
-    QFile file(":JSON/temp.json");
+    QFile file("/Users/yutianqin/bingChilling/BingChillings/BingChillings/users.json");
     QJsonArray jsonArray;
 
     if (file.open(QIODevice::ReadOnly)) {
@@ -49,7 +50,7 @@ QVector<User> Init::readFromJSON()
         for (int i = 0; i < arrayOfIntsArray.size(); ++i) {
             scores.append(arrayOfIntsArray[i].toInt());
         }
-        User user(firstName, lastName, dateOfBirth, gender, profilePictureFileName, username, password, scores, false);
+        User user(firstName, lastName, dateOfBirth, gender, profilePictureFileName, username, password, scores);
         this->users.append(user);
     }
     file.close();

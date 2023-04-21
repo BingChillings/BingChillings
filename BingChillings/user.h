@@ -15,7 +15,7 @@ public:
     User();
     User(QString &firstName, QString &lastName, QDate &dateOfBirth,
          QString &gender, QString &profilePictureFileName, QString &username,
-         QString &password, QVector<int> &arrayOfInts , bool hashNeeded);
+         QString &password, QVector<int> &arrayOfInts);
 
     QString firstName();
     QString lastName();
@@ -28,16 +28,15 @@ public:
 
 
     void write();
-//    QVector<User> read();
-//    QString passwordHash(QString &password);
+//    QVector<User> read(); 
 //    void validatePassword(QString &password);
 //    void validateUsername(QString &username);
-////    bool checkPassword(QString &password, User &user);
 //    bool checkPassword(QString &password, User &user);
+    QString passwordHash(QString &password);
+    bool checkPassword(QString &password, User &user);
 
 
 private:
-
     QString firstName_;
     QString lastName_;
     QDate dateOfBirth_;

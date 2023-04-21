@@ -13,7 +13,5 @@
         <file>images/cat.png</file>
         <file>images/monster.png</file>
     </qresource>
-    <qresource prefix="/">
-        <file>JSON/temp.json</file>
-    </qresource>
+    <qresource prefix="/"/>
 </RCC>

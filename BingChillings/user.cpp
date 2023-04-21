@@ -2,6 +2,9 @@
 #include <QJsonDocument>
 #include <QFile>
 #include <QCryptographicHash>
+#include <QCoreApplication>
+#include <QDir>
+#include <QFileDialog>
 #include "init.h"
 
 
@@ -84,17 +87,18 @@ void User::write()
     userObject["password"] = this->password();
 //    userObject["scores"] = QJsonArray::fromVector(QVector<QVariant>::fromList(this->scores()));
 
-    QFile jsonFile(":/JSON/temp.json");
+//    QString dir_path;
+//    QDir dir(QCoreApplication::applicationDirPath());
+//    dir_path = dir.relativeFilePath("../../");
+//    QString filename = QFileDialog::getOpenFileName(this,"MSD",dir_path,tr())
+
+    QFile jsonFile("/Users/yutianqin/bingChilling/BingChillings/BingChillings/users.json");
     if (!QFile::exists(jsonFile.fileName())) {
         qDebug() << "write: JSON file does not exist";
         return;
     }
     if (!(QFile::permissions(jsonFile.fileName()))) {
         qDebug() << "write: User does not have write permission for JSON file";
-        return;
-    }
-    if (!jsonFile.open(QIODevice::ReadOnly)) {
-        qWarning() << "write: Failed to open JSON file:" << jsonFile.errorString();
         return;
     }
     if (!jsonFile.open(QIODevice::WriteOnly)) {
@@ -106,6 +110,29 @@ void User::write()
     jsonFile.close();
 }
 
+
+
+QString User::passwordHash(QString &password) {
+    QByteArray passwordBytes = password.toUtf8();
+
+    QCryptographicHash hasher(QCryptographicHash::Sha256);
+    hasher.addData(passwordBytes);
+    QByteArray hash = hasher.result();
+
+    QString hashString = hash.toHex();
+
+    return hashString;
+}
+
+
+
+bool User::checkPassword(QString &password, User &user){
+    if (user.password() != passwordHash(password) ){
+        return false;
+    }else {
+        return true;
+    }
+}
 
 
 
