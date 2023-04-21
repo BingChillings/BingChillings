@@ -17,11 +17,11 @@ User::User( QString &firstName, QString &lastName, QDate &dateOfBirth,
     // If first time making user, then validate the password then hash
     if(hashNeeded){
         try {
-            validatePassword(password);
-            password_ = passwordHash(password);
-            // Also check username
-            validateUsername(username);
-            username_ = username;
+//            validatePassword(password);
+//            password_ = passwordHash(password);
+//            // Also check username
+//            validateUsername(username);
+//            username_ = username;
         } catch (const std::runtime_error &e) {
 
             qDebug() << "Error:" << e.what();
@@ -101,33 +101,33 @@ void User::write(QVector<User> &users){
 
 
 
-void User::validateUsername(QString &username) {
-    if (username.length() < 3) {
-        throw std::runtime_error("Username must be at least 3 characters long.");
-    }
+//void User::validateUsername(QString &username) {
+//    if (username.length() < 3) {
+//        throw std::runtime_error("Username must be at least 3 characters long.");
+//    }
 
-    bool hasInvalidCharacter = false;
+//    bool hasInvalidCharacter = false;
 
-    for (QChar &ch : username) {
-        if (!ch.isLetterOrNumber() || ch.isSpace()) {
-            hasInvalidCharacter = true;
-            break;
-        }
-    }
+//    for (QChar &ch : username) {
+//        if (!ch.isLetterOrNumber() || ch.isSpace()) {
+//            hasInvalidCharacter = true;
+//            break;
+//        }
+//    }
 
-    if (hasInvalidCharacter) {
-        throw std::runtime_error("Username must not contain special characters or spaces.");
-    }
-}
+//    if (hasInvalidCharacter) {
+//        throw std::runtime_error("Username must not contain special characters or spaces.");
+//    }
+//}
 
 //check password at login
-bool User::checkPassword(QString &password, User &user){
-    if (user.password() != passwordHash(password) ){
-        return false;
-    }else {
-        return true;
-    }
-}
+//bool User::checkPassword(QString &password, User &user){
+//    if (user.password() != passwordHash(password) ){
+//        return false;
+//    }else {
+//        return true;
+//    }
+//}
 
 
 
