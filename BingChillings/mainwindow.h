@@ -20,6 +20,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void setDate();
 
 private slots:
     void playButtonPressed();

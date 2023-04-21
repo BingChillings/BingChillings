@@ -23,12 +23,14 @@ public:
     QString password();
     QVector<int> scores();
 
-    void read();
+//    QVector<User> read();
     void write(QVector<User> &users);
-    QString passwordHash(QString &password);
-    void validatePassword(QString &password);
-    void validateUsername(QString &username);
-    bool checkPasswor(QString &password, User &user);
+//    QString passwordHash(QString &password);
+//    void validatePassword(QString &password);
+//    void validateUsername(QString &username);
+////    bool checkPassword(QString &password, User &user);
+//    bool checkPassword(QString &password, User &user);
+
 private:
 
     QString firstName_;
