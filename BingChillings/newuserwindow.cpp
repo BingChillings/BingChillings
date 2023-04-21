@@ -1,14 +1,35 @@
 #include "newuserwindow.h"
 #include "ui_newuserwindow.h"
+#include "init.h"
+#include <QPushButton>
+#include <QCryptographicHash>
+
 
 NewUserWindow::NewUserWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::NewUserWindow)
 {
     ui->setupUi(this);
+
+    this->users = Init::users;
     setupGenderBox();
     connect(ui->submitButton, &QPushButton::clicked, this, &NewUserWindow::validateFields);
     connect(ui->resetButton, &QPushButton::clicked, this, &NewUserWindow::resetFields);
+
+    // Check which profile picture did the user pick
+//    connect(ui->dogIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
+//    connect(ui->carIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
+//    connect(ui->catIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
+//    connect(ui->heartIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
+//    connect(ui->icecreamIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
+//    connect(ui->monsterIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
+//    connect(ui->moonIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
+//    connect(ui->planeIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
+//    connect(ui->starIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
+//    connect(ui->sunIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
+//    connect(ui->treeIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
+//    connect(ui->wheatIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
+//    connect(ui->submitPushButton, &QPushButton::clicked, this, &NewUserWindow::backToLogin);
 }
 
 NewUserWindow::~NewUserWindow()
@@ -16,12 +37,16 @@ NewUserWindow::~NewUserWindow()
     delete ui;
 }
 
+
+
 void NewUserWindow::setupGenderBox(){
     ui->genderComboBox->addItem("Male");
     ui->genderComboBox->addItem("Female");
     ui->genderComboBox->addItem("Other");
     ui->genderComboBox->addItem("Prefer Not to Say");
 }
+
+
 
 void NewUserWindow::resetFields(){
     QList<QPushButton *> listIcons = ui->userIconGroup->findChildren<QPushButton *>();
@@ -133,8 +158,100 @@ void NewUserWindow::validateFields(){
     }
 
     birthday = ui->birthdayEdit->date();
+    QVector<int> scores = {};
+
+    QString hashedPassword = passwordHash(password);
+    if ( hasCapitalLetter && hasSpecialCharacter && !hasSpace ) {
+        User newUser(firstname, lastname, birthday, gender, profilePictureFileName, username, hashedPassword, scores);
+        this->user = newUser;
+
+        // Write this newly created user to the JSON file
+        user.write();
+        this->close();
+    }
+}
+
+
+QString NewUserWindow::passwordHash(QString &password)
+{
+    QByteArray passwordBytes = password.toUtf8();
+
+    QCryptographicHash hasher(QCryptographicHash::Sha256);
+    hasher.addData(passwordBytes);
+    QByteArray hash = hasher.result();
+
+    QString hashString = hash.toHex();
+
+    return hashString;
 }
 
 
 
+
+void NewUserWindow::dogProfilePic()
+{
+    QPushButton *button = this->ui->dogIconButton;
+    QIcon icon = button->icon();
+    profilePicName = icon.name();
+}
+void NewUserWindow::carProfilePic()
+{
+    QPushButton *button = this->ui->carIconButton;
+    QIcon icon = button->icon();
+    profilePicName = icon.name();
+}
+void NewUserWindow::catProfilePic()
+{
+    QPushButton *button = this->ui->catIconButton;
+    QIcon icon = button->icon();
+    profilePicName = icon.name();
+}
+void NewUserWindow::heartProfilePic()
+{
+    QPushButton *button = this->ui->heartIconButton;
+    QIcon icon = button->icon();
+    profilePicName = icon.name();
+}
+void NewUserWindow::icecreamProfilePic()
+{
+    QPushButton *button = this->ui->icecreamIconButton;
+    QIcon icon = button->icon();
+    profilePicName = icon.name();
+}
+void NewUserWindow::monsterProfilePic()
+{
+    QPushButton *button = this->ui->monsterIconButton;
+    QIcon icon = button->icon();
+    profilePicName = icon.name();
+}
+void NewUserWindow::moonProfilePic()
+{
+    QPushButton *button = this->ui->moonIconButton;
+    QIcon icon = button->icon();
+    profilePicName = icon.name();
+}
+void NewUserWindow::planeProfilePic()
+{
+    QPushButton *button = this->ui->planeIconButton;
+    QIcon icon = button->icon();
+    profilePicName = icon.name();
+}
+void NewUserWindow::starProfilePic()
+{
+    QPushButton *button = this->ui->starIconButton;
+    QIcon icon = button->icon();
+    profilePicName = icon.name();
+}
+void NewUserWindow::sunProfilePic()
+{
+    QPushButton *button = this->ui->sunIconButton;
+    QIcon icon = button->icon();
+    profilePicName = icon.name();
+}
+void NewUserWindow::treeProfilePic()
+{
+    QPushButton *button = this->ui->wheatIconButton;
+    QIcon icon = button->icon();
+    profilePicName = icon.name();
+}
 

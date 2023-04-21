@@ -34,10 +34,10 @@ HEADERS += \
     user.h
 
 FORMS += \
+    newuserwindow.ui \
     highscoresform.ui \
     loginform.ui \
-    mainwindow.ui \
-    newuserwindow.ui
+    mainwindow.ui
 
 
 # Default rules for deployment.

@@ -6,8 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
+
+    <width>651</width>
+    <height>513</height>
+
     <width>661</width>
     <height>478</height>
+
    </rect>
   </property>
   <property name="windowTitle">
@@ -703,6 +708,9 @@ QPushButton:checked
     </attribute>
    </widget>
   </widget>
+
+<!--  <widget class="QPushButton" name="submitPushButton">-->
+
   <widget class="QPushButton" name="submitButton">
    <property name="geometry">
     <rect>

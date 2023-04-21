@@ -13,4 +13,5 @@
         <file>images/cat.png</file>
         <file>images/monster.png</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

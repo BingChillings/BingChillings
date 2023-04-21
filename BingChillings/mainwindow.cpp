@@ -3,6 +3,9 @@
 #include "highscoresform.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QGraphicsView>
+#include "init.h"
+
 
 const int WINDOW_WIDTH = 1000;
 const int WINDOW_HEIGHT = 750;
@@ -12,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    this->users = Init::users;
+
     setDate();
     connect(ui->playButton, &QPushButton::clicked, this, &MainWindow::playButtonPressed);
     connect(ui->highScoresButton, &QPushButton::clicked, this, &MainWindow::highScoreButtonPressed);
