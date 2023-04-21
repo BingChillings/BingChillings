@@ -9,7 +9,7 @@ class Init
 public:
     Init();
 
-    static QVector<User> users;
+    QVector<User> users;
 
     void readFromJSON();
 

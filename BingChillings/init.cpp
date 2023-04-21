@@ -1,7 +1,6 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QCryptographicHash>
-
 #include "init.h"
 
 

@@ -16,6 +16,7 @@ SOURCES += \
     loginform.cpp \
     main.cpp \
     mainwindow.cpp \
+    newuserwindow.cpp \
     paddle.cpp \
     user.cpp
 
@@ -26,6 +27,7 @@ HEADERS += \
     gamescene.h \
     loginform.h \
     mainwindow.h \
+    newuserwindow.h \
     paddle.h \
     user.h
 
