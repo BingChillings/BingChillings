@@ -32,8 +32,7 @@ void MainWindow::playButtonPressed(){
 //slot for end game
 void MainWindow::handleGameEnd(QString type, int lives, int score)
 {
-    delete view;
-    delete game_scene;
+    view->close();
     //update text box once it's available.
 }
 
