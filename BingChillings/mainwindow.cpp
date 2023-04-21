@@ -1,5 +1,6 @@
 #include "QtCore/qdatetime.h"
 #include "gamescene.h"
+#include "highscoresform.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QGraphicsView>
@@ -14,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setDate();
     connect(ui->playButton, &QPushButton::clicked, this, &MainWindow::playButtonPressed);
+    connect(ui->highScoresButton, &QPushButton::clicked, this, &MainWindow::highScoreButtonPressed);
+    connect(ui->leaderBoardButton, &QPushButton::clicked, this, &MainWindow::leaderBoardButtonPressed);
 }
 
 MainWindow::~MainWindow()
@@ -33,11 +36,15 @@ void MainWindow::playButtonPressed(){
 }
 
 void MainWindow::highScoreButtonPressed(){
-
+    HighScoresForm *highScoreForm = new HighScoresForm();
+    //highScoreForm->setScoreBoard(scores, true); // Need to add QVector<int> scores
+    highScoreForm->show();
 }
 
 void MainWindow::leaderBoardButtonPressed(){
-
+    HighScoresForm *highScoreForm = new HighScoresForm();
+    //highScoreForm->setScoreBoard(scores, false); // Need to add QVector<int> scores
+    highScoreForm->show();
 }
 
 void MainWindow::setUserForm(QString img, QString username){
