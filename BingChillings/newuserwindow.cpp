@@ -75,6 +75,6 @@ void NewUserWindow::resetFields(){
     ui->lastNameEdit->clear();
     ui->usernameEdit->clear();
     ui->passwordEdit->clear();
-    ui->genderComboBox->clear();
+    ui->genderComboBox->setCurrentIndex(-1);
     ui->birthdayEdit->setDate(QDate(2000,01,01));
 }
