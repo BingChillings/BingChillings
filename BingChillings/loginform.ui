@@ -18,13 +18,14 @@
   </property>
   <property name="styleSheet">
    <string notr="true">*{
-font-size:24px;
+font-size:18px;
 background:rgb(163, 96, 240);
 }
 
 QLabel
 {
-font-size: 30px;
+font-size: 34px;
+font-weight: bold;
 }
 
 #errorMessageLabel
@@ -45,9 +46,11 @@ QPushButton
 border: 1px rgb(255, 141, 144);
 background:rgb(255, 141, 144);
 border-radius:9px;
-color: #333;
+font-family: sans-serif;
+font-weight: 200;
+color: black
 }
-QPushButton:hover
+QPushButton:hover:!pressed
 {
 border: 1px rgba(255, 138, 145, 123);
 background:rgba(255, 138, 145, 123);
@@ -59,12 +62,12 @@ QToolButton
 {
  background-color: rgb(255, 141, 144);
  border-width:1px;
- border-radius:50px;
+ border-radius:200px;
  border-color: red;
- max-width:100px;
- max-height:100px;
- min-width:100px;
- min-height:100px;
+ max-width:400px;
+ max-height:400px;
+ min-width:400px;
+ min-height:400px;
 }
 
 QLineEdit
@@ -100,9 +103,9 @@ color:#111;
    <widget class="QLabel" name="loginFormLabel">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>60</y>
-      <width>181</width>
+      <x>40</x>
+      <y>40</y>
+      <width>221</width>
       <height>41</height>
      </rect>
     </property>
@@ -113,9 +116,9 @@ color:#111;
    <widget class="QPushButton" name="submitPushButton">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>40</x>
       <y>250</y>
-      <width>341</width>
+      <width>291</width>
       <height>32</height>
      </rect>
     </property>
@@ -127,7 +130,7 @@ color:#111;
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>110</y>
+      <y>120</y>
       <width>291</width>
       <height>31</height>
      </rect>
@@ -167,9 +170,9 @@ color:#111;
    <widget class="QPushButton" name="newUserButton">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>40</x>
       <y>300</y>
-      <width>161</width>
+      <width>140</width>
       <height>32</height>
      </rect>
     </property>
@@ -180,9 +183,9 @@ color:#111;
    <widget class="QPushButton" name="guestButton">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>190</x>
       <y>300</y>
-      <width>161</width>
+      <width>140</width>
       <height>32</height>
      </rect>
     </property>
@@ -190,26 +193,26 @@ color:#111;
      <string>Guest</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QToolButton" name="toolButton">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>60</y>
-     <width>100</width>
-     <height>100</height>
-    </rect>
-   </property>
-   <property name="icon">
-    <iconset resource="resource.qrc">
-     <normaloff>:/images/images/ice-cream.png</normaloff>:/images/images/ice-cream.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>50</width>
-     <height>50</height>
-    </size>
-   </property>
+   <widget class="QToolButton" name="toolButton">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>-270</y>
+      <width>400</width>
+      <height>400</height>
+     </rect>
+    </property>
+    <property name="icon">
+     <iconset resource="resource.qrc">
+      <normaloff>:/images/images/ice-cream.png</normaloff>:/images/images/ice-cream.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>50</width>
+      <height>50</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <widget class="QLabel" name="errorMessageLabel">
    <property name="geometry">
@@ -224,6 +227,7 @@ color:#111;
     <font>
      <family>Roboto Mono</family>
      <pointsize>-1</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
