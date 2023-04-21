@@ -53,6 +53,7 @@ void LoginForm::validateUsernamePassword()
     }
 
     MainWindow *mainWindow = new MainWindow();
+    qDebug() << user.profilePictureFileName();
     mainWindow->setUserForm(user.profilePictureFileName(), user.username());
     mainWindow->show();
 }
