@@ -6,6 +6,7 @@
 #include <QGraphicsView>
 #include "init.h"
 
+
 const int WINDOW_WIDTH = 1000;
 const int WINDOW_HEIGHT = 750;
 
@@ -29,14 +30,32 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::playButtonPressed(){
-    GameScene* game_scene = new GameScene();
-    QGraphicsView* view = new QGraphicsView();
+    game_scene = new GameScene();
+    view = new QGraphicsView();
     view->setScene(game_scene);
     view->setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     view->setHorizontalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     view->setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
-
+    connect(game_scene, &GameScene::end_game, this, &MainWindow::handleGameEnd);
     view->show();
+    view->setFocus();
+}
+
+//slot for end game
+void MainWindow::handleGameEnd(QString type, int lives, int score)
+{
+    view->close();
+    delete view; //might break, maybe get rid of
+    std::string summary;
+    if(lives == 0){
+        summary = "Good Try! Final Score: " + std::to_string(score);
+    }
+    else{
+        summary = "Congrats! \nLives Remaining: " + std::to_string(lives) + "\nFinal Score: " + std::to_string(score);
+    }
+    ui->scoreEdit->setPlainText(QString::fromStdString(summary));
+
+    //TODO: Update Scores at this point with the returned score!
 }
 
 void MainWindow::highScoreButtonPressed(){

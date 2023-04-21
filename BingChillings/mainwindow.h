@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "gamescene.h"
+#include <QGraphicsView>
 #include <QWidget>
 #include "user.h"
 
@@ -11,6 +13,8 @@ class MainWindow;
 class MainWindow : public QWidget
 {
     Q_OBJECT
+    GameScene* game_scene;
+    QGraphicsView* view;
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
@@ -27,6 +31,7 @@ private:
 
 private slots:
     void playButtonPressed();
+    void handleGameEnd(QString type, int lives, int score);
     void highScoreButtonPressed();
     void leaderBoardButtonPressed();
 };

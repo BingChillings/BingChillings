@@ -29,11 +29,11 @@ GameScene::GameScene()
 
     //build bricks and ball
     build_grid(10, 8);
-    add_ball(10, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2); //can update the speed later for difficulty;
+    int rand_x = arc4random() % (WINDOW_WIDTH - 100) + 100;
+    add_ball(10, rand_x, WINDOW_HEIGHT / 2); //can update the speed later for difficulty;
     //setup background
     setSceneRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
     setBackgroundBrush(Qt::black);
-
 }
 
 //TODO: once a vector of balls exists, only lose a life if the vector is empty. Also check if empty, then pause game with continue
@@ -75,7 +75,8 @@ void GameScene::update_score(){
 }
 
 void GameScene::bonus_ball(){
-    add_ball(10, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+    int rand_x_coord = arc4random() % (WINDOW_WIDTH - 50) + 50;
+    add_ball(10, rand_x_coord, WINDOW_HEIGHT / 2);
 }
 
 void GameScene::build_grid(int height, int width){
