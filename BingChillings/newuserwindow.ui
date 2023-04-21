@@ -6,13 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-
-    <width>651</width>
-    <height>513</height>
-
     <width>661</width>
     <height>478</height>
-
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,8 +47,10 @@ color: #333;
 }
 QPushButton:hover:!pressed
 {
-border: 1px rgba(255, 138, 145, 123);
-background:rgba(255, 138, 145, 123);
+background:rgb(204, 114, 117);
+border-width:2px;
+border-color: white;
+border-style:solid;
 border-radius:9px;
 color: #333;
 }
@@ -708,9 +705,6 @@ QPushButton:checked
     </attribute>
    </widget>
   </widget>
-
-<!--  <widget class="QPushButton" name="submitPushButton">-->
-
   <widget class="QPushButton" name="submitButton">
    <property name="geometry">
     <rect>

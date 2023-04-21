@@ -92,7 +92,7 @@ void User::write()
 //    dir_path = dir.relativeFilePath("../../");
 //    QString filename = QFileDialog::getOpenFileName(this,"MSD",dir_path,tr())
 
-    QFile jsonFile("/Users/yutianqin/bingChilling/BingChillings/BingChillings/users.json");
+    QFile jsonFile("/Users/thomasford/MSD/GitRepos/BingChillings/BingChillings/JSON/users.json");
     if (!QFile::exists(jsonFile.fileName())) {
         qDebug() << "write: JSON file does not exist";
         return;
@@ -101,7 +101,7 @@ void User::write()
         qDebug() << "write: User does not have write permission for JSON file";
         return;
     }
-    if (!jsonFile.open(QIODevice::WriteOnly)) {
+    if (!jsonFile.open(QIODevice::ReadWrite|QIODevice::Text|QIODevice::Append)) {
         qDebug() << "write: Failed to open JSON file for writing" << jsonFile.errorString();
         return;
     }
