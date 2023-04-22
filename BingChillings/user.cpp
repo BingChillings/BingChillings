@@ -77,14 +77,25 @@ void User::write()
     Init::users.append(*this);
 
     // Write to the JSON file
-    QJsonObject userObject;
-    userObject["firstName"] = this->firstName();
-    userObject["lastName"] = this->lastName();
-    userObject["dateOfBirth"] = this->dateOfBirth().toString(Qt::ISODate);
-    userObject["gender"] = this->gender();
-    userObject["profilePictureFileName"] = this->profilePictureFileName();
-    userObject["username"] = this->username();
-    userObject["password"] = this->password();
+//    QJsonObject userSingleObject;
+//    QJsonObject userArrObj;
+
+
+    this->userSingleObject["firstName"] = this->firstName();
+    this->userSingleObject["lastName"] = this->lastName();
+    this->userSingleObject["dateOfBirth"] = this->dateOfBirth().toString(Qt::ISODate);
+    this->userSingleObject["gender"] = this->gender();
+    this->userSingleObject["profilePictureFileName"] = this->profilePictureFileName();
+//    userSingleObject["username"] = this->username();
+    this->userSingleObject["password"] = this->password();
+
+//    userArrObj[this->username()] = userSingleObject;
+    this->userArrObj.insert(this->username(), this->userSingleObject);
+
+    qDebug() << "left";
+
+//    QJsonDocument jsonDoc(userArrObj);
+
 //    userObject["scores"] = QJsonArray::fromVector(QVector<QVariant>::fromList(this->scores()));
 
 //    QString dir_path;
@@ -92,7 +103,7 @@ void User::write()
 //    dir_path = dir.relativeFilePath("../../");
 //    QString filename = QFileDialog::getOpenFileName(this,"MSD",dir_path,tr())
 
-    QFile jsonFile("/Users/yutianqin/bingChilling/BingChillings/BingChillings/users.json");
+    QFile jsonFile("/Users/xsyang/Documents/GitHub/BingChillings/BingChillings/JSON/users.json");
     if (!QFile::exists(jsonFile.fileName())) {
         qDebug() << "write: JSON file does not exist";
         return;
@@ -101,11 +112,12 @@ void User::write()
         qDebug() << "write: User does not have write permission for JSON file";
         return;
     }
-    if (!jsonFile.open(QIODevice::WriteOnly)) {
+
+    if (!jsonFile.open(QIODevice::ReadWrite|QIODevice::Text|QIODevice::Append)) {
         qDebug() << "write: Failed to open JSON file for writing" << jsonFile.errorString();
         return;
     }
-    QJsonDocument jsonDocument(userObject);
+    QJsonDocument jsonDocument(this->userArrObj);
     jsonFile.write(jsonDocument.toJson());
     jsonFile.close();
 }
@@ -125,14 +137,23 @@ QString User::passwordHash(QString &password) {
 }
 
 
+bool checkPassword(QJsonObject &userArrObj, QString &password, QString &username){
+    if (userArrObj[username][password] != password){
+    //        qDebug() << "left";
+            return false;
+        }else {
+            return true;
+        }
+};
 
-bool User::checkPassword(QString &password, User &user){
-    if (user.password() != passwordHash(password) ){
-        return false;
-    }else {
-        return true;
-    }
-}
+//bool User::checkPassword(QString &password, User &user){
+//    if (user.password() != passwordHash(password) ){
+////        qDebug() << "left";
+//        return false;
+//    }else {
+//        return true;
+//    }
+//}
 
 
 
