@@ -26,7 +26,7 @@ private:
 
 private slots:
     void newUserForm();
-//    void validateUsernamePassword();
+    void validateUsernamePassword();
     void enterAsGuest();
 };
 

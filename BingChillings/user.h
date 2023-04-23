@@ -26,19 +26,16 @@ public:
     QString password() const;
     QVector<int> scores();
 
-    QJsonObject userSingleObject;
-    QJsonObject userArrObj;
-
+    QJsonObject userInfoObject;
+    QJsonObject userNameObject;
 
     void write();
-//    QVector<User> read();
-//    void validatePassword(QString &password);
-//    void validateUsername(QString &username);
+    //    QVector<User> read();
+    //    void validatePassword(QString &password);
+    //    void validateUsername(QString &username);
+    //    bool checkPassword(QString &password, User &user);
     QString passwordHash(QString &password);
-    bool checkPassword(QJsonObject &userArrObj, QString &password, QString &username);
-//    bool checkPassword(QString &password, User &user);
-//    bool checkPassword()
-//    bool checkPassword(QString &password, QString &username);
+    bool checkPassword(QString &password, User &user);
 
 
 private:

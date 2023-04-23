@@ -1,10 +1,10 @@
 {
-    "xidada": {
-        "dateOfBirth": "2000-01-01",
-        "firstName": "jinping",
-        "gender": "Prefer Not to Say",
-        "lastName": "xi",
-        "password": "9caf10ed3fedd3b00dc7225c108c85cc7b12676cd5e372774a249c128951d040",
-        "profilePictureFileName": ":/images/images/monster.png"
+    "zolale": {
+        "dateOfBirth": "1998-01-01",
+        "firstName": "a",
+        "gender": "Male",
+        "lastName": "b",
+        "password": "119fbc71406b58d9b708a2a3b7754b4ff25514aae1d723558a34f222094596f4",
+        "profilePictureFileName": ":/images/images/dog.png"
     }
 }
