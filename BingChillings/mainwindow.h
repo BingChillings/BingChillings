@@ -4,6 +4,7 @@
 #include "gamescene.h"
 #include <QGraphicsView>
 #include <QWidget>
+#include "user.h"
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +20,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
+    QVector<User> users;
     void setUserForm(QString img, QString username);
     void setGuestForm();
 

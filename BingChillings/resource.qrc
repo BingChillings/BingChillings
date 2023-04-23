@@ -12,5 +12,7 @@
         <file>images/star.png</file>
         <file>images/cat.png</file>
         <file>images/monster.png</file>
+        <file>images/cake.png</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

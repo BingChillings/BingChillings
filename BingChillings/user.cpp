@@ -2,36 +2,39 @@
 #include <QJsonDocument>
 #include <QFile>
 #include <QCryptographicHash>
+#include <QCoreApplication>
+#include <QDir>
+#include <QFileDialog>
+#include "init.h"
 
-// If first time creating that user put true for hashNeeded
-User::User( QString &firstName, QString &lastName, QDate &dateOfBirth,
+
+
+User::User() :
+    firstName_(""),
+    lastName_(""),
+    dateOfBirth_(QDate()),
+    gender_(""),
+    profilePictureFileName_(""),
+    username_(""),
+    password_(""),
+    scores_(QVector<int>())
+{
+    // Default constructor implementation
+}
+
+
+User::User(QString &firstName, QString &lastName, QDate &dateOfBirth,
            QString &gender, QString &profilePictureFileName, QString &username,
-           QString &password, QVector<int> &arrayOfInts , bool hashNeeded) :
+           QString &password, QVector<int> &arrayOfInts) :
     firstName_(firstName),
     lastName_(lastName),
     dateOfBirth_(dateOfBirth),
     gender_(gender),
     profilePictureFileName_(profilePictureFileName),
+    username_(username),
+    password_(password),
     scores_(arrayOfInts)
 {
-    // If first time making user, then validate the password then hash
-    if(hashNeeded){
-        try {
-//            validatePassword(password);
-//            password_ = passwordHash(password);
-//            // Also check username
-//            validateUsername(username);
-//            username_ = username;
-        } catch (const std::runtime_error &e) {
-
-            qDebug() << "Error:" << e.what();
-        }
-    }
-    // If reading from file then password is has already been validated and hashed
-    else{
-        password_ = password;
-        username_ = username;
-    }
 }
 
 QString User::firstName(){
@@ -54,11 +57,11 @@ QString User::profilePictureFileName(){
     return profilePictureFileName_;
 }
 
-QString User::username(){
+QString User::username() const {
     return username_;
 }
 
-QString User::password(){
+QString User::password() const {
     return password_;
 }
 
@@ -66,36 +69,73 @@ QVector<int> User::scores(){
     return scores_;
 }
 
-void User::write(QVector<User> &users){
 
-    QJsonArray jsonArray;
 
-    for (User &user : users) {
-        QJsonObject json;
+void User::write()
+{
+    // Write to the global QVector of the Init class
+    Init::users.append(*this);
 
-        json["firstName"] = user.firstName();
-        json["lastName"] = user.lastName();
-        json["dateOfBirth"] = user.dateOfBirth().toString(Qt::ISODate);
-        json["gender"] = user.gender();
-        json["profilePictureFileName"] = user.profilePictureFileName();
-        json["username"] = user.username();
-        json["password"] = user.password();
+    // Write to the JSON file
+    QJsonObject userObject;
+    userObject["firstName"] = this->firstName();
+    userObject["lastName"] = this->lastName();
+    userObject["dateOfBirth"] = this->dateOfBirth().toString(Qt::ISODate);
+    userObject["gender"] = this->gender();
+    userObject["profilePictureFileName"] = this->profilePictureFileName();
+    userObject["username"] = this->username();
+    userObject["password"] = this->password();
+    //    userObject["scores"] = QJsonArray::fromVector(QVector<QVariant>::fromList(this->scores()));
 
-        QJsonArray arrayOfIntsArray;
-        for (int value : user.scores()) {
-            arrayOfIntsArray.append(value);
-        }
-        json["arrayOfInts"] = arrayOfIntsArray;
+    //    QString dir_path;
+    //    QDir dir(QCoreApplication::applicationDirPath());
+    //    dir_path = dir.relativeFilePath("../../");
+    //    QString filename = QFileDialog::getOpenFileName(this,"MSD",dir_path,tr())
 
-        jsonArray.append(json);
+    QFile jsonFile("/Users/thomasford/MSD/GitRepos/BingChillings/BingChillings/JSON/users.json");
+    if (!QFile::exists(jsonFile.fileName())) {
+        qDebug() << "write: JSON file does not exist";
+        return;
     }
+    if (!(QFile::permissions(jsonFile.fileName()))) {
+        qDebug() << "write: User does not have write permission for JSON file";
+        return;
+    }
+    if (!jsonFile.open(QIODevice::ReadWrite|QIODevice::Text|QIODevice::Append)) {
+        qDebug() << "write: Failed to open JSON file for writing" << jsonFile.errorString();
+        return;
+    }
+    QJsonDocument jsonDocument(userObject);
+    jsonFile.write(jsonDocument.toJson());
+    jsonFile.close();
+}
 
-    QFile file("users.json");
-    if (file.open(QIODevice::WriteOnly)){
-        QJsonDocument jsonDoc(jsonArray);
-        file.write(jsonDoc.toJson());
+
+
+QString User::passwordHash(QString &password) {
+    QByteArray passwordBytes = password.toUtf8();
+
+    QCryptographicHash hasher(QCryptographicHash::Sha256);
+    hasher.addData(passwordBytes);
+    QByteArray hash = hasher.result();
+
+    QString hashString = hash.toHex();
+
+    return hashString;
+}
+
+
+
+bool User::checkPassword(QString &password, User &user){
+    if (user.password() != passwordHash(password) ){
+        return false;
+    }else {
+        return true;
     }
 }
+
+
+
 
 //void User::validateUsername(QString &username) {
 //    if (username.length() < 3) {
@@ -126,46 +166,85 @@ void User::write(QVector<User> &users){
 //}
 
 
-//QVector<User> User::read(){
-//    QVector<User> users;
 
-//    QFile file("users.json");
+
+
+
+//void User::write()
+//{
+//    QJsonObject userObject;
+//    userObject["firstName"] = this->firstName();
+//    userObject["lastName"] = this->lastName();
+//    userObject["dateOfBirth"] = this->dateOfBirth().toString(Qt::ISODate);
+//    userObject["gender"] = this->gender();
+//    userObject["profilePictureFileName"] = this->profilePictureFileName();
+//    userObject["username"] = this->username();
+//    userObject["password"] = this->password();
+////    userObject["scores"] = QJsonArray::fromVector(QVector<QVariant>::fromList(this->scores()));
+
+//    QFile jsonFile(":/JSON/temp.json");
+//    if (!QFile::exists(jsonFile.fileName())) {
+//        qDebug() << "JSON file does not exist";
+//        return;
+//    }
+
+//    QFileDevice::Permissions newPermissions = QFileDevice::ReadOwner | QFileDevice::WriteOwner |
+//                                              QFileDevice::ReadUser | QFileDevice::WriteUser |
+//                                              QFileDevice::ReadOther;
+//    if (!QFile::setPermissions(jsonFile.fileName(), newPermissions)) {
+//        qDebug() << "Failed to set permissions";
+//    }
+
+//    if (!(QFile::permissions(jsonFile.fileName()))) {
+//        qDebug() << "User does not have write permission for JSON file";
+//        return;
+//    }
+//    if (!jsonFile.open(QIODevice::WriteOnly)) {
+//        qDebug() << "Failed to open JSON file for writing";
+//        return;
+//    }
+//    QJsonDocument jsonDocument(userObject);
+//    jsonFile.write(jsonDocument.toJson());
+//    jsonFile.close();
+//}
+
+
+
+
+//void User::write(){
+
 //    QJsonArray jsonArray;
 
-//    if (file.open(QIODevice::ReadOnly)){
-//        QByteArray fileContent = file.readAll();
-//        QJsonDocument jsonDocument = QJsonDocument::fromJson(fileContent);
+//    for (User &user : users) {
+//        QJsonObject json;
 
-//        if (jsonDocument.isNull()){
-//            qDebug() << "Failed to parse JSON from file.";
+//        json["firstName"] = user.firstName();
+//        json["lastName"] = user.lastName();
+//        json["dateOfBirth"] = user.dateOfBirth().toString(Qt::ISODate);
+//        json["gender"] = user.gender();
+//        json["profilePictureFileName"] = user.profilePictureFileName();
+//        json["username"] = user.username();
+//        json["password"] = user.password();
+
+//        QJsonArray arrayOfIntsArray;
+//        for (int value : user.scores()) {
+//            arrayOfIntsArray.append(value);
 //        }
+//        json["arrayOfInts"] = arrayOfIntsArray;
 
-//        jsonArray = jsonDocument.array();
-//    }
-//    else{
-//        qDebug() << "Failed to open file for reading.";
+//        jsonArray.append(json);
 //    }
 
-//    for (int i = 0; i < jsonArray.size(); ++i) {
-//        QJsonObject json = jsonArray[i].toObject();
-
-//        QString firstName = json["firstName"].toString();
-//        QString lastName = json["lastName"].toString();
-//        QDate dateOfBirth = QDate::fromString(json["dateOfBirth"].toString(), Qt::ISODate);
-//        QString gender = json["gender"].toString();
-//        QString profilePictureFileName = json["profilePictureFileName"].toString();
-//        QString username = json["username"].toString();
-//        QString password = json["password"].toString();
-
-//        QVector<int> scores;
-//        QJsonArray arrayOfIntsArray = json["arrayOfInts"].toArray();
-//        for (int i = 0; i < arrayOfIntsArray.size(); ++i) {
-//            scores.append(arrayOfIntsArray[i].toInt());
-//        }
-
-//        User user(firstName, lastName, dateOfBirth, gender, profilePictureFileName, username, password, scores, false);
-//        users.append(user);
+//    QFile file(":/JSON/JSON/users.json");
+//    if (file.open(QIODevice::WriteOnly)){
+//        QJsonDocument jsonDoc(jsonArray);
+//        file.write(jsonDoc.toJson());
 //    }
-
-//    return users;
 //}
+
+
+
+
+
+
+
