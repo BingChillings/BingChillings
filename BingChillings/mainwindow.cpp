@@ -1,8 +1,8 @@
 #include "QtCore/qdatetime.h"
 #include "gamescene.h"
+#include "highscoresform.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QGraphicsView>
 
 const int WINDOW_WIDTH = 1000;
 const int WINDOW_HEIGHT = 750;
@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setDate();
     connect(ui->playButton, &QPushButton::clicked, this, &MainWindow::playButtonPressed);
+    connect(ui->highScoresButton, &QPushButton::clicked, this, &MainWindow::highScoreButtonPressed);
+    connect(ui->leaderBoardButton, &QPushButton::clicked, this, &MainWindow::leaderBoardButtonPressed);
 }
 
 MainWindow::~MainWindow()
@@ -22,22 +24,44 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::playButtonPressed(){
-    GameScene* game_scene = new GameScene();
-    QGraphicsView* view = new QGraphicsView();
+    game_scene = new GameScene();
+    view = new QGraphicsView();
     view->setScene(game_scene);
     view->setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     view->setHorizontalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     view->setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
-
+    connect(game_scene, &GameScene::end_game, this, &MainWindow::handleGameEnd);
     view->show();
+    view->setFocus();
+}
+
+//slot for end game
+void MainWindow::handleGameEnd(QString type, int lives, int score)
+{
+    view->close();
+    delete view; //might break, maybe get rid of
+    std::string summary;
+    if(lives == 0){
+        summary = "Good Try! Final Score: " + std::to_string(score);
+    }
+    else{
+        summary = "Congrats! \nLives Remaining: " + std::to_string(lives) + "\nFinal Score: " + std::to_string(score);
+    }
+    ui->scoreEdit->setPlainText(QString::fromStdString(summary));
+
+    //TODO: Update Scores at this point with the returned score!
 }
 
 void MainWindow::highScoreButtonPressed(){
-
+    HighScoresForm *highScoreForm = new HighScoresForm();
+    //highScoreForm->setScoreBoard(scores, true); // Need to add QVector<int> scores
+    highScoreForm->show();
 }
 
 void MainWindow::leaderBoardButtonPressed(){
-
+    HighScoresForm *highScoreForm = new HighScoresForm();
+    //highScoreForm->setScoreBoard(scores, false); // Need to add QVector<int> scores
+    highScoreForm->show();
 }
 
 void MainWindow::setUserForm(QString img, QString username){

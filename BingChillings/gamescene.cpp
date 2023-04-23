@@ -33,7 +33,6 @@ GameScene::GameScene()
     //setup background
     setSceneRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
     setBackgroundBrush(Qt::black);
-
 }
 
 //TODO: once a vector of balls exists, only lose a life if the vector is empty. Also check if empty, then pause game with continue

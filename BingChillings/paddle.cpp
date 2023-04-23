@@ -28,7 +28,6 @@ void Paddle::keyPressEvent(QKeyEvent *event)
         if(x() <= (WINDOW_WIDTH - width) - 20){
             setPos(x() + 80, y());
         }
-
     }
 }
 

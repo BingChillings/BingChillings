@@ -15,8 +15,15 @@ public:
     explicit NewUserWindow(QWidget *parent = nullptr);
     ~NewUserWindow();
 
+    void validateFields();
+
+private slots:
+    void resetFields();
+
+
 private:
     Ui::NewUserWindow *ui;
+    void setupGenderBox();
 };
 
 #endif // NEWUSERWINDOW_H
