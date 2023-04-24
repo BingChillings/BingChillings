@@ -72,32 +72,15 @@ QVector<User> Init::readFromJSON()
 
 
             QVector<int> scores;
-//            QJsonArray arrayOfIntsArray = userInfoOject["arrayOfInts"].toArray();
+
             User user(firstName, lastName, dateOfBirth, gender, profilePictureFileName, username, password, scores);
             users.push_back(user);
-//            QVector<int> scores;
-//            QJsonArray arrayOfIntsArray = json["arrayOfInts"].toArray();
+
         }
-//        QJsonObject userNameObject = userNameObject.value(key).toObject();
-//        jsonArray.append(userNameObject);
+
     }
 
-//    for (int i = 0; i < jsonArray.size(); ++i)
-//    {
-//        QJsonObject userInfo = jsonArray[i].toObject();
-//        QString firstName = json["firstName"].toString();
-//        QString lastName = json["lastName"].toString();
-//        QDate dateOfBirth = QDate::fromString(json["dateOfBirth"].toString(), Qt::ISODate);
-//        QString gender = json["gender"].toString();
-//        QString profilePictureFileName = json["profilePictureFileName"].toString();
-//        QString username = json["username"].toString();
-//        QString password = json["password"].toString();
 
-//        QVector<int> scores;
-//        QJsonArray arrayOfIntsArray = json["arrayOfInts"].toArray();
-//        for (int i = 0; i < arrayOfIntsArray.size(); ++i) {
-//            scores.append(arrayOfIntsArray[i].toInt());
-//        }
 
     file.close();
     return users;
