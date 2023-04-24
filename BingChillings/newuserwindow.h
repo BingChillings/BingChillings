@@ -16,31 +16,16 @@ public:
     explicit NewUserWindow(QWidget *parent = nullptr);
     ~NewUserWindow();
 
-    User user;
-    QString profilePicName;
-
-    QString passwordHash(QString &password);
-    bool isUserNameTaken(QString &usernameRequst);
-
-    void dogProfilePic();
-    void carProfilePic();
-    void catProfilePic();
-    void heartProfilePic();
-    void icecreamProfilePic();
-    void monsterProfilePic();
-    void moonProfilePic();
-    void planeProfilePic();
-    void starProfilePic();
-    void sunProfilePic();
-    void treeProfilePic();
-    void wheatProfilePic();
-    void validateFields();
-
 private slots:
     void resetFields();
+    void validateFields();
 
 private:
     Ui::NewUserWindow *ui;
+    User user;
+    QString profilePicName;
+    QString passwordHash(QString &password);
+    bool isUserNameTaken(QString &usernameRequst);
     void setupGenderBox();
 };
 

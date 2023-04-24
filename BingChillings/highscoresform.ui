@@ -66,7 +66,7 @@ border:none;
 color:#717072;
 }</string>
   </property>
-  <widget class="QFrame" name="frame">
+  <widget class="QFrame" name="frameOut">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -105,7 +105,7 @@ color:#717072;
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QFrame" name="frame">
+      <widget class="QFrame" name="frameIn">
        <layout class="QFormLayout" name="formLayout">
         <item row="0" column="0">
          <widget class="QLabel" name="label">
@@ -308,7 +308,7 @@ color:#717072;
     </rect>
    </property>
    <property name="text">
-    <string>High Score</string>
+    <string>Recent Scores</string>
    </property>
   </widget>
  </widget>

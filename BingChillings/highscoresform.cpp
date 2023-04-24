@@ -19,7 +19,7 @@ void HighScoresForm::returnButtonPressed(){
     this->close();
 }
 
-void HighScoresForm::setScoreBoard(QVector<int> scores, bool user){
+void HighScoresForm::setScoreBoard(QVector<int> scores){
     ui->line1->setText(QString::number(scores[0]));
     ui->line2->setText(QString::number(scores[1]));
     ui->line3->setText(QString::number(scores[2]));
@@ -30,9 +30,4 @@ void HighScoresForm::setScoreBoard(QVector<int> scores, bool user){
     ui->line8->setText(QString::number(scores[7]));
     ui->line9->setText(QString::number(scores[8]));
     ui->line10->setText(QString::number(scores[9]));
-    if (user){
-        ui->highScoreLabel->setText("Leader Board");
-    }
-    else
-        ui->highScoreLabel->setText("High Scores");
 }

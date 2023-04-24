@@ -6,8 +6,6 @@
 #include <QDebug>
 #include "init.h"
 
-
-
 QVector<User> Init::users;
 
 
