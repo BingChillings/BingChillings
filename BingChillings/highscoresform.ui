@@ -151,7 +151,7 @@ color:#717072;
            <bool>true</bool>
           </property>
           <property name="placeholderText">
-           <string>test 1</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -163,9 +163,6 @@ color:#717072;
           <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="placeholderText">
-           <string>test 3</string>
-          </property>
          </widget>
         </item>
         <item row="3" column="1">
@@ -176,9 +173,6 @@ color:#717072;
           <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="placeholderText">
-           <string>test 4</string>
-          </property>
          </widget>
         </item>
         <item row="4" column="1">
@@ -188,9 +182,6 @@ color:#717072;
           </property>
           <property name="readOnly">
            <bool>true</bool>
-          </property>
-          <property name="placeholderText">
-           <string>test 5</string>
           </property>
          </widget>
         </item>
@@ -207,9 +198,6 @@ color:#717072;
           </property>
           <property name="readOnly">
            <bool>true</bool>
-          </property>
-          <property name="placeholderText">
-           <string>test 2</string>
           </property>
          </widget>
         </item>
@@ -262,9 +250,6 @@ color:#717072;
           <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="placeholderText">
-           <string>test 6</string>
-          </property>
          </widget>
         </item>
         <item row="1" column="1">
@@ -274,9 +259,6 @@ color:#717072;
           </property>
           <property name="readOnly">
            <bool>true</bool>
-          </property>
-          <property name="placeholderText">
-           <string>test 7</string>
           </property>
          </widget>
         </item>
@@ -288,9 +270,6 @@ color:#717072;
           <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="placeholderText">
-           <string>test 8</string>
-          </property>
          </widget>
         </item>
         <item row="3" column="1">
@@ -301,9 +280,6 @@ color:#717072;
           <property name="readOnly">
            <bool>true</bool>
           </property>
-          <property name="placeholderText">
-           <string>test 9</string>
-          </property>
          </widget>
         </item>
         <item row="4" column="1">
@@ -313,9 +289,6 @@ color:#717072;
           </property>
           <property name="readOnly">
            <bool>true</bool>
-          </property>
-          <property name="placeholderText">
-           <string>test 10</string>
           </property>
          </widget>
         </item>
@@ -335,7 +308,7 @@ color:#717072;
     </rect>
    </property>
    <property name="text">
-    <string>Score Lable</string>
+    <string>High Score</string>
    </property>
   </widget>
  </widget>
