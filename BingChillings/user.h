@@ -36,8 +36,7 @@ public:
     //    bool checkPassword(QString &password, User &user);
     QString passwordHash(QString &password);
     bool checkPassword(QString &password, User &user);
-    bool isBirthday();
-    void updateScore(int score);
+
 
 private:
     QString firstName_;

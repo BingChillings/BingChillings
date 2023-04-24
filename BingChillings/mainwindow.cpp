@@ -55,7 +55,7 @@ void MainWindow::handleGameEnd(QString type, int lives, int score)
     }
     ui->scoreEdit->setPlainText(QString::fromStdString(summary));
 
-//    user->updateScore(score); // Assuming `user` is a pointer to the current user object
+    //TODO: Update Scores at this point with the returned score!
 }
 
 void MainWindow::highScoreButtonPressed(){

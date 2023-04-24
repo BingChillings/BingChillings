@@ -16,3 +16,77 @@
                 "profilePictureFileName": ":/images/images/car.png"
         }
 }
+[
+    {
+        "xsyang": {
+            "dateOfBirth": "1998-01-01",
+            "firstName": "alex",
+            "gender": "Male",
+            "lastName": "yang",
+            "password": "119fbc71406b58d9b708a2a3b7754b4ff25514aae1d723558a34f222094596f4",
+            "profilePictureFileName": ":/images/images/dog.png"
+        }
+    },
+    {
+        "xsyang": {
+            "dateOfBirth": "1998-01-01",
+            "firstName": "alex",
+            "gender": "Male",
+            "lastName": "yang",
+            "password": "119fbc71406b58d9b708a2a3b7754b4ff25514aae1d723558a34f222094596f4",
+            "profilePictureFileName": ":/images/images/dog.png"
+        }
+    },
+    {
+        "xsyang": {
+            "dateOfBirth": "1998-01-01",
+            "firstName": "alex",
+            "gender": "Male",
+            "lastName": "yang",
+            "password": "119fbc71406b58d9b708a2a3b7754b4ff25514aae1d723558a34f222094596f4",
+            "profilePictureFileName": ":/images/images/dog.png"
+        }
+    }
+]
+[
+    {
+        "zolales": {
+            "dateOfBirth": "1998-10-23",
+            "firstName": "xiangsen",
+            "gender": "Male",
+            "lastName": "yang",
+            "password": "119fbc71406b58d9b708a2a3b7754b4ff25514aae1d723558a34f222094596f4",
+            "profilePictureFileName": ":/images/images/sun.png"
+        }
+    },
+    {
+        "zolales": {
+            "dateOfBirth": "1998-10-23",
+            "firstName": "xiangsen",
+            "gender": "Male",
+            "lastName": "yang",
+            "password": "119fbc71406b58d9b708a2a3b7754b4ff25514aae1d723558a34f222094596f4",
+            "profilePictureFileName": ":/images/images/sun.png"
+        }
+    },
+    {
+        "zolales": {
+            "dateOfBirth": "1998-10-23",
+            "firstName": "xiangsen",
+            "gender": "Male",
+            "lastName": "yang",
+            "password": "119fbc71406b58d9b708a2a3b7754b4ff25514aae1d723558a34f222094596f4",
+            "profilePictureFileName": ":/images/images/sun.png"
+        }
+    },
+    {
+        "zolales": {
+            "dateOfBirth": "1998-10-23",
+            "firstName": "xiangsen",
+            "gender": "Male",
+            "lastName": "yang",
+            "password": "119fbc71406b58d9b708a2a3b7754b4ff25514aae1d723558a34f222094596f4",
+            "profilePictureFileName": ":/images/images/sun.png"
+        }
+    }
+]

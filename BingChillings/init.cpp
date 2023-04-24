@@ -18,22 +18,6 @@ QVector<User> Init::readFromJSON()
 {
     QVector<User> users;
     QFile file("/Users/xsyang/Documents/GitHub/BingChillings/BingChillings/JSON/users.json");
-//    QJsonArray jsonArray;
-
-
-//    if (file.open(QIODevice::ReadOnly)) {
-//        QByteArray fileContent = file.readAll();
-//        QJsonDocument jsonDocument = QJsonDocument::fromJson(fileContent);
-
-////        if (jsonDocument.isNull()){
-////            qDebug() << "readFromJSON: This file is null.";
-////        }
-
-////        jsonArray = jsonDocument.array();
-//    }
-//    else {
-//        qDebug() << "readFromJSON: Failed to open file for reading.";
-//    }
 
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "Failed to open file for reading";
