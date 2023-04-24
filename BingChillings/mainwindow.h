@@ -7,6 +7,8 @@
 #include <QTimer>
 #include "user.h"
 
+#include <QGraphicsScene>
+
 namespace Ui {
 class MainWindow;
 }
@@ -14,6 +16,10 @@ class MainWindow;
 class MainWindow : public QWidget
 {
     Q_OBJECT
+
+    QTimer *dropCakeTimer;
+    QGraphicsScene *bd_scene;
+
     GameScene* game_scene;
     QGraphicsView* view;
 
@@ -28,13 +34,16 @@ public:
 private:
     Ui::MainWindow *ui;
     void setDate();
+    int index;
 
 
 private slots:
     void playButtonPressed();
     void handleGameEnd(QString type, int lives, int score);
     void highScoreButtonPressed();
-    void leaderBoardButtonPressed();
+    //void leaderBoardButtonPressed();
+
+    void birthdayEffect();
 };
 
 #endif // MAINWINDOW_H

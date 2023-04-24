@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "yt": [
         {
@@ -37,3 +38,27 @@
         }
     ]
 }
+=======
+[
+    {
+        "firstName": "John",
+        "lastName": "Doe",
+        "dateOfBirth": "1990-05-10",
+        "gender": "Male",
+        "profilePictureFileName": ":/images/images/ice-cream.png",
+        "username": "john_doe",
+        "password": "a3f1e2c4d5b6c7",
+        "scores": [15, 20, 25]
+    },
+    {
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "dateOfBirth": "1985-08-15",
+        "gender": "Female",
+        "profilePictureFileName": ":/images/images/heart.png",
+        "username": "jane_smith",
+        "password": "a1b2c3d4e5f6g7",
+        "scores": [12, 22, 32]
+    }
+]
+>>>>>>> main

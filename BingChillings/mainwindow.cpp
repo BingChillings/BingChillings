@@ -4,10 +4,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "init.h"
+
 #include "cake.h"
 
 #include <QGraphicsView>
-
+#include <QGraphicsProxyWidget>
 
 
 
@@ -22,10 +23,31 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->users = Init::users;
 
+    // Need to initialize index from users
+    ifBirthday();
+    // Create a QGraphicsProxyWidget for the button
+    QGraphicsProxyWidget *proxyPlayButton = new QGraphicsProxyWidget();
+    QGraphicsProxyWidget *proxyScoreButton = new QGraphicsProxyWidget();
+    proxyScoreButton->setWidget(ui->highScoresButton);
+    // Add the proxyButton to the QGraphicsScene
+    proxyPlayButton->setWidget(ui->playButton);
+    bd_scene->addItem(proxyPlayButton);
+
+    bd_scene->addItem(proxyScoreButton);
+
+    dropCakeTimer = new QTimer(this);
+    dropCakeTimer->setInterval(80);
+    connect( dropCakeTimer, SIGNAL(timeout()), this, SLOT(birthdayEffect()) );
+    dropCakeTimer->start();
+
+    // Stop the dropCakeTimer after 3 seconds
+    QTimer::singleShot(3000, dropCakeTimer, SLOT(stop()));
+
+    ui->setupUi(this);
     setDate();
     connect(ui->playButton, &QPushButton::clicked, this, &MainWindow::playButtonPressed);
     connect(ui->highScoresButton, &QPushButton::clicked, this, &MainWindow::highScoreButtonPressed);
-    connect(ui->leaderBoardButton, &QPushButton::clicked, this, &MainWindow::leaderBoardButtonPressed);
+//    connect(ui->leaderBoardButton, &QPushButton::clicked, this, &MainWindow::leaderBoardButtonPressed);
 }
 
 
@@ -39,6 +61,29 @@ MainWindow::~MainWindow()
 void MainWindow::ifBirthday()
 {
     ui->birthdaylineEdit->setText("Happy Birthday");
+
+    //Extra work
+    bd_scene = new QGraphicsScene();
+    QGraphicsView *view = new QGraphicsView(this);
+    view->setScene(bd_scene);
+    view->setFixedSize(this->width(), this->height());
+    bd_scene->setSceneRect(0, 0, view->width(), view->height());
+    view->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+    view->setHorizontalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
+    view->setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
+//    setHappyBirthdayText(*bd_scene);
+    view->setAttribute(Qt::WA_TranslucentBackground);// Set the background to transparent
+    view->show();
+    view->setFocus();
+}
+
+void MainWindow::birthdayEffect()
+{
+    // Create a new droplet object and set its position
+    Cake *cake = new Cake();
+    cake->setPos( arc4random_uniform(this->bd_scene->width()-30), -30 );
+    // Add the droplet to the scene
+    this->bd_scene->addItem(cake);
 }
 
 
@@ -69,20 +114,21 @@ void MainWindow::handleGameEnd(QString type, int lives, int score)
     }
     ui->scoreEdit->setPlainText(QString::fromStdString(summary));
 
-    //TODO: Update Scores at this point with the returned score!
+//    user->updateScore(score); // Assuming `user` is a pointer to the current user object
 }
 
 void MainWindow::highScoreButtonPressed(){
+
     HighScoresForm *highScoreForm = new HighScoresForm();
-    //highScoreForm->setScoreBoard(scores, true); // Need to add QVector<int> scores
+    highScoreForm->setScoreBoard(Init::users[this->index].scores(), true); // Need to add QVector<int> scores
     highScoreForm->show();
 }
 
-void MainWindow::leaderBoardButtonPressed(){
-    HighScoresForm *highScoreForm = new HighScoresForm();
-    //highScoreForm->setScoreBoard(scores, false); // Need to add QVector<int> scores
-    highScoreForm->show();
-}
+//void MainWindow::leaderBoardButtonPressed(){
+//    HighScoresForm *highScoreForm = new HighScoresForm();
+//    //highScoreForm->setScoreBoard(scores, false); // Need to add QVector<int> scores
+//    highScoreForm->show();
+//}
 
 void MainWindow::setUserForm(QString img, QString username){
     ui->usernameLabel->setText(username);

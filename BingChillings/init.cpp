@@ -1,6 +1,9 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QCryptographicHash>
+#include <QCoreApplication>
+#include <QDir>
+#include <QDebug>
 #include "init.h"
 
 
@@ -23,15 +26,22 @@ Init::Init()
 
 QVector<User> Init::readFromJSON()
 {
-    QVector<User> users;
-    QFile file("/Users/yutianqin/bingChilling/BingChillings/BingChillings/users.json");
+    QDir currnetDir = QDir::current();
+    QString filePath = currnetDir.relativeFilePath("../../../../BingChillings/users.json");
+    QJsonArray jsonArray;
+    QFile file(filePath);
 
     if (file.open(QIODevice::ReadOnly)) {
-        QJsonParseError error;
-        QJsonDocument doc = QJsonDocument::fromJson(file.readAll(), &error);
-        if (doc.isNull()) {
-            qWarning("Failed to parse JSON: %s", error.errorString().toUtf8().constData());
+        QByteArray fileContent = file.readAll();
+        QJsonDocument jsonDocument = QJsonDocument::fromJson(fileContent);
+
+        if (jsonDocument.isNull()){
+            return users;
         }
+
+        jsonArray = jsonDocument.array();
+    }
+    else {
         qDebug() << "readFromJSON: Failed to open file for reading.";
         return users;
     }
@@ -47,7 +57,7 @@ QVector<User> Init::readFromJSON()
         qDebug() << "readFromJSON: This file is null.";
         return users;
     }
-    QJsonArray jsonArray = jsonDocument.array();
+    jsonArray = jsonDocument.array();
 
 
     for (int i = 0; i < jsonArray.size(); ++i)
@@ -62,8 +72,8 @@ QVector<User> Init::readFromJSON()
         QString username = json["username"].toString();
         QString password = json["password"].toString();
         QVector<int> scores;
+        QJsonArray arrayOfIntsArray = json["scores"].toArray();
 
-        QJsonArray arrayOfIntsArray = json["arrayOfInts"].toArray();
         for (int i = 0; i < arrayOfIntsArray.size(); ++i) {
             scores.append(arrayOfIntsArray[i].toInt());
         }
@@ -71,6 +81,10 @@ QVector<User> Init::readFromJSON()
         this->users.append(user);
     }
     file.close();
+
+    for(User &u : users){
+        qDebug() << u.username();
+    }
     return users;
 }
 

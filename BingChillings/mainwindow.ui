@@ -148,26 +148,13 @@ color:#717072;
    <property name="geometry">
     <rect>
      <x>380</x>
-     <y>120</y>
+     <y>90</y>
      <width>401</width>
      <height>51</height>
     </rect>
    </property>
    <property name="text">
     <string>High Scores</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="leaderBoardButton">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>60</y>
-     <width>401</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Leader Board</string>
    </property>
   </widget>
   <widget class="QPushButton" name="playButton">

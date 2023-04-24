@@ -16,12 +16,11 @@ public:
     explicit NewUserWindow(QWidget *parent = nullptr);
     ~NewUserWindow();
 
-    QVector<User> users;
-
     User user;
     QString profilePicName;
 
     QString passwordHash(QString &password);
+    bool isUserNameTaken(QString &usernameRequst);
 
     void dogProfilePic();
     void carProfilePic();

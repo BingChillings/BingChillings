@@ -11,7 +11,6 @@ NewUserWindow::NewUserWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->users = Init::users;
     setupGenderBox();
     connect(ui->submitButton, &QPushButton::clicked, this, &NewUserWindow::validateFields);
     connect(ui->resetButton, &QPushButton::clicked, this, &NewUserWindow::resetFields);
@@ -153,6 +152,7 @@ void NewUserWindow::validateFields(){
         // Write this newly created user to the JSON file
         user.write();
         this->close();
+        Init::users.append(user);
     }
 }
 
@@ -238,5 +238,15 @@ void NewUserWindow::treeProfilePic()
     QPushButton *button = this->ui->wheatIconButton;
     QIcon icon = button->icon();
     profilePicName = icon.name();
+}
+
+bool NewUserWindow::isUserNameTaken(QString &usernameRequst)
+{
+    for ( User &u : Init::users) {
+        if (u.username() == usernameRequst) {
+            return true;
+        }
+    }
+    return false;
 }
 
