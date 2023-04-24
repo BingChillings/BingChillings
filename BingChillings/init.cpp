@@ -1,6 +1,9 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QCryptographicHash>
+#include <QCoreApplication>
+#include <QDir>
+#include <QDebug>
 #include "init.h"
 
 
@@ -16,17 +19,22 @@ Init::Init()
 
 QVector<User> Init::readFromJSON()
 {
-    QVector<User> users;
-    QFile file("/Users/yutianqin/bingChilling/BingChillings/BingChillings/users.json");
+//    QDir::setCurrent(QCoreApplication::applicationDirPath());
+//    QFile file("users.json");
+//    QFile file(QDir::homePath() + "users.json");
+
+    QDir currnetDir = QDir::current();
+    QString filePath = currnetDir.relativeFilePath("../../../../BingChillings/users.json");
     QJsonArray jsonArray;
+    QFile file(filePath);
 
     if (file.open(QIODevice::ReadOnly)) {
         QByteArray fileContent = file.readAll();
         QJsonDocument jsonDocument = QJsonDocument::fromJson(fileContent);
 
-//        if (jsonDocument.isNull()){
-//            qDebug() << "readFromJSON: This file is null.";
-//        }
+        if (jsonDocument.isNull()){
+            return users;
+        }
 
         jsonArray = jsonDocument.array();
     }
@@ -46,7 +54,7 @@ QVector<User> Init::readFromJSON()
         QString password = json["password"].toString();
 
         QVector<int> scores;
-        QJsonArray arrayOfIntsArray = json["arrayOfInts"].toArray();
+        QJsonArray arrayOfIntsArray = json["scores"].toArray();
         for (int i = 0; i < arrayOfIntsArray.size(); ++i) {
             scores.append(arrayOfIntsArray[i].toInt());
         }
@@ -54,6 +62,10 @@ QVector<User> Init::readFromJSON()
         this->users.append(user);
     }
     file.close();
+
+    for(User &u : users){
+        qDebug() << u.username();
+    }
     return users;
 }
 

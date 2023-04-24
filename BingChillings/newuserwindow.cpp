@@ -168,6 +168,7 @@ void NewUserWindow::validateFields(){
         // Write this newly created user to the JSON file
         user.write();
         this->close();
+        users.append(user);
     }
 }
 
@@ -253,5 +254,15 @@ void NewUserWindow::treeProfilePic()
     QPushButton *button = this->ui->wheatIconButton;
     QIcon icon = button->icon();
     profilePicName = icon.name();
+}
+
+bool NewUserWindow::isUserNameTaken(QString &usernameRequst)
+{
+    for ( User &u : users) {
+        if (u.username() == usernameRequst) {
+            return true;
+        }
+    }
+    return false;
 }
 

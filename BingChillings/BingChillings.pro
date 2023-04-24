@@ -51,4 +51,4 @@ RESOURCES += \
     resource.qrc
 
 DISTFILES += \
-    JSON/users.json
+    users.json

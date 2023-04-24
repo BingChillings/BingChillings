@@ -22,6 +22,7 @@ public:
     QString profilePicName;
 
     QString passwordHash(QString &password);
+    bool isUserNameTaken(QString &usernameRequst);
 
     void dogProfilePic();
     void carProfilePic();
