@@ -16,8 +16,6 @@ public:
     explicit NewUserWindow(QWidget *parent = nullptr);
     ~NewUserWindow();
 
-    QVector<User> users;
-
     User user;
     QString profilePicName;
 
