@@ -18,7 +18,7 @@ QVector<User> Init::readFromJSON()
 {
     QVector<User> users;
     QFile file("/Users/xsyang/Documents/GitHub/BingChillings/BingChillings/JSON/users.json");
-    QJsonArray jsonArray;
+//    QJsonArray jsonArray;
 
 
 //    if (file.open(QIODevice::ReadOnly)) {
@@ -54,18 +54,20 @@ QVector<User> Init::readFromJSON()
     for (const QString &key : userNameObject.keys()) {
         if(userNameObject[key].isObject()){
 
-            QJsonObject userInfoOject =  userNameObject[key].toObject();
+            QJsonObject userInfoObject =  userNameObject[key].toObject();
 
             QString username = key;
             qDebug() << key << error.errorString();
 
-            QString firstName = userInfoOject["firstName"].toString();
-            QString lastName = userInfoOject["lastName"].toString();
-            QDate dateOfBirth = QDate::fromString(userInfoOject["dateOfBirth"].toString(), Qt::ISODate);
-            QString gender = userInfoOject["gender"].toString();
-            QString profilePictureFileName = userInfoOject["profilePictureFileName"].toString();
+            QString firstName = userInfoObject["firstName"].toString();
+            qDebug() << firstName << error.errorString();
+
+            QString lastName = userInfoObject["lastName"].toString();
+            QDate dateOfBirth = QDate::fromString(userInfoObject["dateOfBirth"].toString(), Qt::ISODate);
+            QString gender = userInfoObject["gender"].toString();
+            QString profilePictureFileName = userInfoObject["profilePictureFileName"].toString();
 //            QString username = userInfoOject["username"].toString();
-            QString password = userInfoOject["password"].toString();
+            QString password = userInfoObject["password"].toString();
             QVector<int> scores;
 //            QJsonArray arrayOfIntsArray = userInfoOject["arrayOfInts"].toArray();
             User user(firstName, lastName, dateOfBirth, gender, profilePictureFileName, username, password, scores);

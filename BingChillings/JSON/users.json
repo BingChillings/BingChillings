@@ -1,10 +1,18 @@
 {
-    "zolale": {
-        "dateOfBirth": "1998-01-01",
-        "firstName": "a",
-        "gender": "Male",
-        "lastName": "b",
-        "password": "119fbc71406b58d9b708a2a3b7754b4ff25514aae1d723558a34f222094596f4",
-        "profilePictureFileName": ":/images/images/dog.png"
-    }
+        "zolale": {
+                "dateOfBirth": "1998-01-01",
+                "firstName": "a",
+                "gender": "Male",
+                "lastName": "b",
+                "password": "119fbc71406b58d9b708a2a3b7754b4ff25514aae1d723558a34f222094596f4",
+                "profilePictureFileName": ":/images/images/dog.png"
+        },
+        "xsyang": {
+                "dateOfBirth": "2012-01-01",
+                "firstName": "alx",
+                "gender": "Prefer Not to Say",
+                "lastName": "yang",
+                "password": "119fbc71406b58d9b708a2a3b7754b4ff25514aae1d723558a34f222094596f4",
+                "profilePictureFileName": ":/images/images/car.png"
+        }
 }
