@@ -163,11 +163,10 @@ void NewUserWindow::validateFields(){
     if ( hasCapitalLetter && hasSpecialCharacter && !hasSpace ) {
         User newUser(firstname, lastname, birthday, gender, profilePictureFileName, username, hashedPassword, scores);
         this->user = newUser;
-
+        Init::users.append(user);
         // Write this newly created user to the JSON file
         user.write();
         this->close();
-        Init::users.append(user);
     }
 }
 
@@ -184,8 +183,6 @@ QString NewUserWindow::passwordHash(QString &password)
 
     return hashString;
 }
-
-
 
 
 void NewUserWindow::dogProfilePic()

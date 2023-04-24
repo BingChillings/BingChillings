@@ -19,9 +19,6 @@ Init::Init()
 
 QVector<User> Init::readFromJSON()
 {
-//    QDir::setCurrent(QCoreApplication::applicationDirPath());
-//    QFile file("users.json");
-//    QFile file(QDir::homePath() + "users.json");
 
     QDir currnetDir = QDir::current();
     QString filePath = currnetDir.relativeFilePath("../../../../BingChillings/users.json");

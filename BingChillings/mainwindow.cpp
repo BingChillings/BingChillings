@@ -16,7 +16,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->users = Init::users;
+    for (int i = 0 ; i < Init::users.size() ; i++){
+        if (Init::users[i].username() == ui->usernameLabel->text()){
+            index = i;
+        }
+    }
 
     // Need to initialize index from users
 
@@ -57,7 +61,7 @@ void MainWindow::handleGameEnd(QString type, int lives, int score)
     }
     ui->scoreEdit->setPlainText(QString::fromStdString(summary));
 
-//    user->updateScore(score); // Assuming `user` is a pointer to the current user object
+    Init::users[index].updateScore(score);
 }
 
 void MainWindow::highScoreButtonPressed(){

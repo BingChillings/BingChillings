@@ -128,8 +128,10 @@ QString User::passwordHash(QString &password) {
 }
 
 
-bool User::checkPassword(QString &password, User &user){
-    if (user.password() != passwordHash(password) ){
+bool User::checkPassword(QString &password){
+    qDebug() << this->password();
+    qDebug() << passwordHash(password);
+    if (this->password() != passwordHash(password) ){
         return false;
     }else {
         return true;

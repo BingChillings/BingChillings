@@ -8,7 +8,7 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
-
+#include <QDebug>
 
 
 LoginForm::LoginForm(QWidget *parent) :
@@ -16,8 +16,6 @@ LoginForm::LoginForm(QWidget *parent) :
     ui(new Ui::LoginForm)
 {
     ui->setupUi(this);
-
-    this->users = Init::users;
 
     connect(ui->submitPushButton, &QPushButton::clicked, this, &LoginForm::validateUsernamePassword);
     connect(ui->newUserButton, &QPushButton::clicked, this, &LoginForm::newUserForm);
@@ -30,32 +28,41 @@ LoginForm::~LoginForm()
 }
 
 
-
-
-
 void LoginForm::validateUsernamePassword()
 {
     QString userName = ui->usernameLineEdit->text();
     QString passWord = ui->passwordLineEdit->text();
-
     User user;
-    for ( User &u : users ) {
+    bool foundUser = false;
+    bool correcrPassword = false;
+
+    for ( User &u : Init::users ) {
+         qDebug() << userName;
+         qDebug() << u.username();
         if ( u.username() == userName ){
+            foundUser = true;
+            qDebug() << userName;
             user = u;
-            if ( !u.checkPassword(passWord, u) ) {
+            if ( !u.checkPassword(passWord) ) {
                 ui->errorMessageLabel->setText("Wrong password");
-                return;
+                break;
             }
+            correcrPassword = true;
         } else {
             ui->errorMessageLabel->setText("Cannot find the user");
-            return;
+            continue;
         }
     }
 
+    if(foundUser && correcrPassword){
     MainWindow *mainWindow = new MainWindow();
     qDebug() << user.profilePictureFileName();
     mainWindow->setUserForm(user.profilePictureFileName(), user.username());
     mainWindow->show();
+    }
+    else{
+    return;
+    }
 }
 
 
