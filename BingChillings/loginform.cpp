@@ -67,9 +67,6 @@ void LoginForm::validateUsernamePassword()
     }
 }
 
-
-
-
 void LoginForm::newUserForm()
 {
     NewUserWindow *newUserWindow = new NewUserWindow();

@@ -231,6 +231,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </property>
    </widget>
   </widget>
+  <widget class="QLineEdit" name="birthdayLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>200</y>
+     <width>361</width>
+     <height>51</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources>
   <include location="resource.qrc"/>

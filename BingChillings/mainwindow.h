@@ -4,6 +4,7 @@
 #include "gamescene.h"
 #include <QGraphicsView>
 #include <QWidget>
+#include <QTimer>
 #include "user.h"
 
 namespace Ui {
@@ -13,8 +14,14 @@ class MainWindow;
 class MainWindow : public QWidget
 {
     Q_OBJECT
+
+    QTimer *dropCakeTimer;
+    QGraphicsScene *bd_scene;
+
     GameScene* game_scene;
     QGraphicsView* view;
+
+
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
@@ -25,6 +32,7 @@ public:
     void setUserForm(QString img, QString username);
     void setGuestForm();
     static QString username;
+    void ifBirthday();
 
 private:
     Ui::MainWindow *ui;
@@ -36,6 +44,8 @@ private slots:
     void handleGameEnd(QString type, int lives, int score);
     void highScoreButtonPressed();
     //void leaderBoardButtonPressed();
+
+    void birthdayEffect();
 };
 
 #endif // MAINWINDOW_H
