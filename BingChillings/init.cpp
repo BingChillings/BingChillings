@@ -48,19 +48,38 @@ QVector<User> Init::readFromJSON()
         qDebug() << "Failed to parse JSON document:" << error.errorString();
     }
 
-    QJsonObject obj = jsonDocument.object();
+    QJsonObject userNameObject = jsonDocument.object();
 
 
-    for (const QString &key : obj.keys()) {
-        QJsonObject userNameObject = obj.value(key).toObject();
-        jsonArray.append(userNameObject);
+    for (const QString &key : userNameObject.keys()) {
+        if(userNameObject[key].isObject()){
+
+            QJsonObject userInfoOject =  userNameObject[key].toObject();
+
+            QString username = key;
+            qDebug() << key << error.errorString();
+
+            QString firstName = userInfoOject["firstName"].toString();
+            QString lastName = userInfoOject["lastName"].toString();
+            QDate dateOfBirth = QDate::fromString(userInfoOject["dateOfBirth"].toString(), Qt::ISODate);
+            QString gender = userInfoOject["gender"].toString();
+            QString profilePictureFileName = userInfoOject["profilePictureFileName"].toString();
+//            QString username = userInfoOject["username"].toString();
+            QString password = userInfoOject["password"].toString();
+            QVector<int> scores;
+//            QJsonArray arrayOfIntsArray = userInfoOject["arrayOfInts"].toArray();
+            User user(firstName, lastName, dateOfBirth, gender, profilePictureFileName, username, password, scores);
+            this->users.append(user);
+//            QVector<int> scores;
+//            QJsonArray arrayOfIntsArray = json["arrayOfInts"].toArray();
+        }
+//        QJsonObject userNameObject = userNameObject.value(key).toObject();
+//        jsonArray.append(userNameObject);
     }
-
-
 
 //    for (int i = 0; i < jsonArray.size(); ++i)
 //    {
-//        QJsonObject json = jsonArray[i].toObject();
+//        QJsonObject userInfo = jsonArray[i].toObject();
 //        QString firstName = json["firstName"].toString();
 //        QString lastName = json["lastName"].toString();
 //        QDate dateOfBirth = QDate::fromString(json["dateOfBirth"].toString(), Qt::ISODate);
@@ -74,9 +93,7 @@ QVector<User> Init::readFromJSON()
 //        for (int i = 0; i < arrayOfIntsArray.size(); ++i) {
 //            scores.append(arrayOfIntsArray[i].toInt());
 //        }
-//        User user(firstName, lastName, dateOfBirth, gender, profilePictureFileName, username, password, scores);
-//        this->users.append(user);
-//    }
+
     file.close();
     return users;
 }

@@ -88,7 +88,8 @@ void User::write()
 //    userInfoObject["username"] = this->username();
     userInfoObject["password"] = this->password();
     //    userObject["scores"] = QJsonArray::fromVector(QVector<QVariant>::fromList(this->scores()));
-     userNameObject[this->username()] = userInfoObject;
+    userNameObject.insert(this->username(), userInfoObject);
+//     userNameObject[this->username()] = userInfoObject;
     //    QString dir_path;
     //    QDir dir(QCoreApplication::applicationDirPath());
     //    dir_path = dir.relativeFilePath("../../");
