@@ -156,7 +156,8 @@ QString User::passwordHash(QString &password) {
 
 
 bool User::checkPassword(QString &password, User &user){
-    if (user.password() != passwordHash(password) ){
+    qDebug() << user.password();
+    if (passwordHash(password) != user.password() ){
         return false;
     }else {
         return true;
