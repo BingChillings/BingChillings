@@ -26,8 +26,8 @@ public:
     QString password() const;
     QVector<int> scores();
 
-    QJsonObject userInfoObject;
-    QJsonObject userNameObject;
+//    QJsonObject userInfoObject;
+//    QJsonObject userNameObject;
 
     void write();
     //    QVector<User> read();

@@ -5,6 +5,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFileDialog>
+#include <QJsonObject>
 #include "init.h"
 
 
@@ -76,19 +77,44 @@ void User::write()
     // Write to the global QVector of the Init class
     Init::users.append(*this);
 
+    // create a vector of userName objects
+    QVector<QJsonObject> userNameObjects;
+
+    for(int i = 0; i < Init::users.length(); i++){
+        QJsonObject userInfoObject;
+        QJsonObject userNameObject;
+
+        userInfoObject["firstName"] = this->firstName();
+        userInfoObject["lastName"] = this->lastName();
+        userInfoObject["dateOfBirth"] = this->dateOfBirth().toString(Qt::ISODate);
+        userInfoObject["gender"] = this->gender();
+        userInfoObject["profilePictureFileName"] = this->profilePictureFileName();
+        userInfoObject["password"] = this->password();
+
+        userNameObject[this->username()] = userInfoObject;
+
+        userNameObjects.append(userNameObject);
+    }
+
+    QJsonArray jsonArray;
+
+    for (auto singleUserNameobject : userNameObjects) {
+        jsonArray.append(singleUserNameobject);
+    }
+
     // Write to the JSON file
 //    QJsonObject userInfoObject;
 //    QJsonObject userNameObject;
 
-    userInfoObject["firstName"] = this->firstName();
-    userInfoObject["lastName"] = this->lastName();
-    userInfoObject["dateOfBirth"] = this->dateOfBirth().toString(Qt::ISODate);
-    userInfoObject["gender"] = this->gender();
-    userInfoObject["profilePictureFileName"] = this->profilePictureFileName();
-//    userInfoObject["username"] = this->username();
-    userInfoObject["password"] = this->password();
-    //    userObject["scores"] = QJsonArray::fromVector(QVector<QVariant>::fromList(this->scores()));
-    userNameObject.insert(this->username(), userInfoObject);
+//    userInfoObject["firstName"] = this->firstName();
+//    userInfoObject["lastName"] = this->lastName();
+//    userInfoObject["dateOfBirth"] = this->dateOfBirth().toString(Qt::ISODate);
+//    userInfoObject["gender"] = this->gender();
+//    userInfoObject["profilePictureFileName"] = this->profilePictureFileName();
+////    userInfoObject["username"] = this->username();
+//    userInfoObject["password"] = this->password();
+//    //    userObject["scores"] = QJsonArray::fromVector(QVector<QVariant>::fromList(this->scores()));
+////    userNameObject.insert(this->username(), userInfoObject);
 //     userNameObject[this->username()] = userInfoObject;
     //    QString dir_path;
     //    QDir dir(QCoreApplication::applicationDirPath());
@@ -108,8 +134,8 @@ void User::write()
         qDebug() << "write: Failed to open JSON file for writing" << jsonFile.errorString();
         return;
     }
-    QJsonDocument jsonDocument(userNameObject);
-    jsonFile.write(jsonDocument.toJson());
+    QJsonDocument doc(jsonArray);
+    jsonFile.write(doc.toJson());
     jsonFile.close();
 }
 

@@ -60,7 +60,7 @@ QVector<User> Init::readFromJSON()
             qDebug() << key << error.errorString();
 
             QString firstName = userInfoObject["firstName"].toString();
-            qDebug() << firstName << error.errorString();
+//            qDebug() << firstName << error.errorString();
 
             QString lastName = userInfoObject["lastName"].toString();
             QDate dateOfBirth = QDate::fromString(userInfoObject["dateOfBirth"].toString(), Qt::ISODate);
@@ -68,10 +68,13 @@ QVector<User> Init::readFromJSON()
             QString profilePictureFileName = userInfoObject["profilePictureFileName"].toString();
 //            QString username = userInfoOject["username"].toString();
             QString password = userInfoObject["password"].toString();
+            qDebug() << password << error.errorString();
+
+
             QVector<int> scores;
 //            QJsonArray arrayOfIntsArray = userInfoOject["arrayOfInts"].toArray();
             User user(firstName, lastName, dateOfBirth, gender, profilePictureFileName, username, password, scores);
-            this->users.append(user);
+            users.push_back(user);
 //            QVector<int> scores;
 //            QJsonArray arrayOfIntsArray = json["arrayOfInts"].toArray();
         }

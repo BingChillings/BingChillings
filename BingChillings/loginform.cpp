@@ -40,12 +40,8 @@ void LoginForm::validateUsernamePassword()
 
     User user;
 
-
-
-//    User user;
-
     for ( User &u : users ) {
-        if ( u.username() == userName ){
+        if ( userName.compare(u.username())){
             user = u;
             if ( !u.checkPassword(passWord, u) ) {
                 ui->errorMessageLabel->setText("Wrong password");
