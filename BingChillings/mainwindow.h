@@ -24,6 +24,7 @@ public:
     QVector<User> users;
     void setUserForm(QString img, QString username);
     void setGuestForm();
+    static QString username;
 
 private:
     Ui::MainWindow *ui;

@@ -74,6 +74,8 @@ QVector<int> User::scores(){
 void User::write()
 
 {
+
+
     QDir currnetDir = QDir::current();
     QString filePath = currnetDir.relativeFilePath("../../../../BingChillings/users.json");
     QFile file(filePath);
@@ -81,6 +83,7 @@ void User::write()
         qDebug() << "write: Failed to open JSON file for reading" << file.errorString();
         return;
     }
+    file.resize(0); // Clear the file contents
 
     QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
     QJsonArray jsonArray = doc.array();
@@ -96,12 +99,12 @@ void User::write()
         json["profilePictureFileName"] = u.profilePictureFileName();
         json["username"] = u.username();
         json["password"] = u.password();
-        QJsonArray arrayOfIntsArray;
-        QVector<int> scores = u.scores();
-        for (int value : scores) {
-            arrayOfIntsArray.append(value);
+        QJsonArray scor;
+        QVector<int> scores_ = u.scores();
+        for (int value : scores_) {
+            scor.append(value);
         }
-        json["arrayOfInts"] = arrayOfIntsArray;
+        json["scores"] = scor;
 
         // Append the new user object to the array
         jsonArray.append(json);
@@ -109,7 +112,6 @@ void User::write()
 
     // Write the updated JSON array back to the file
     file.seek(0); // Move the file pointer back to the beginning
-    file.resize(0); // Clear the file contents
     QJsonDocument updatedDoc(jsonArray);
     file.write(updatedDoc.toJson());
     file.close();
@@ -129,8 +131,6 @@ QString User::passwordHash(QString &password) {
 
 
 bool User::checkPassword(QString &password){
-    qDebug() << this->password();
-    qDebug() << passwordHash(password);
     if (this->password() != passwordHash(password) ){
         return false;
     }else {

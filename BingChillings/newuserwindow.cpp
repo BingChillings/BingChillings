@@ -157,7 +157,7 @@ void NewUserWindow::validateFields(){
     }
 
     birthday = ui->birthdayEdit->date();
-    QVector<int> scores = {};
+    QVector<int> scores( 10, 0 );
 
     QString hashedPassword = passwordHash(password);
     if ( hasCapitalLetter && hasSpecialCharacter && !hasSpace ) {

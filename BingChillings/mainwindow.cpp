@@ -10,6 +10,8 @@
 const int WINDOW_WIDTH = 1000;
 const int WINDOW_HEIGHT = 750;
 
+QString MainWindow::username;
+
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainWindow)
@@ -17,10 +19,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     for (int i = 0 ; i < Init::users.size() ; i++){
-        if (Init::users[i].username() == ui->usernameLabel->text()){
+        if (Init::users[i].username() == username){
             index = i;
         }
     }
+    qDebug() << username;
+    qDebug() << Init::users.size();
+    qDebug() << index;
 
     // Need to initialize index from users
 
@@ -67,7 +72,7 @@ void MainWindow::handleGameEnd(QString type, int lives, int score)
 void MainWindow::highScoreButtonPressed(){
 
     HighScoresForm *highScoreForm = new HighScoresForm();
-    highScoreForm->setScoreBoard(Init::users[this->index].scores(), true); // Need to add QVector<int> scores
+    highScoreForm->setScoreBoard(Init::users[index].scores(), true); // Need to add QVector<int> scores
     highScoreForm->show();
 }
 

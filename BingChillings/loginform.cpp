@@ -37,11 +37,11 @@ void LoginForm::validateUsernamePassword()
     bool correcrPassword = false;
 
     for ( User &u : Init::users ) {
-         qDebug() << userName;
-         qDebug() << u.username();
+        if(foundUser){
+            break;
+        }
         if ( u.username() == userName ){
             foundUser = true;
-            qDebug() << userName;
             user = u;
             if ( !u.checkPassword(passWord) ) {
                 ui->errorMessageLabel->setText("Wrong password");
@@ -55,10 +55,12 @@ void LoginForm::validateUsernamePassword()
     }
 
     if(foundUser && correcrPassword){
+        MainWindow::username = user.username();
     MainWindow *mainWindow = new MainWindow();
     qDebug() << user.profilePictureFileName();
     mainWindow->setUserForm(user.profilePictureFileName(), user.username());
     mainWindow->show();
+    this->close();
     }
     else{
     return;
@@ -76,8 +78,10 @@ void LoginForm::newUserForm()
 
 void LoginForm::enterAsGuest()
 {
+    MainWindow::username = "guest";
     MainWindow *mainWindow = new MainWindow();
     mainWindow->setGuestForm();
     mainWindow->show();
+
     this->close();
 }
