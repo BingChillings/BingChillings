@@ -28,12 +28,13 @@ public:
 private:
     Ui::MainWindow *ui;
     void setDate();
+    int index;
 
 private slots:
     void playButtonPressed();
     void handleGameEnd(QString type, int lives, int score);
     void highScoreButtonPressed();
-    void leaderBoardButtonPressed();
+    //void leaderBoardButtonPressed();
 };
 
 #endif // MAINWINDOW_H

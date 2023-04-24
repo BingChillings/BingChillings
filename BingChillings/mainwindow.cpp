@@ -18,10 +18,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->users = Init::users;
 
+    // Need to initialize index from users
+
     setDate();
     connect(ui->playButton, &QPushButton::clicked, this, &MainWindow::playButtonPressed);
     connect(ui->highScoresButton, &QPushButton::clicked, this, &MainWindow::highScoreButtonPressed);
-    connect(ui->leaderBoardButton, &QPushButton::clicked, this, &MainWindow::leaderBoardButtonPressed);
+//    connect(ui->leaderBoardButton, &QPushButton::clicked, this, &MainWindow::leaderBoardButtonPressed);
 }
 
 MainWindow::~MainWindow()
@@ -59,16 +61,17 @@ void MainWindow::handleGameEnd(QString type, int lives, int score)
 }
 
 void MainWindow::highScoreButtonPressed(){
+
     HighScoresForm *highScoreForm = new HighScoresForm();
-    //highScoreForm->setScoreBoard(scores, true); // Need to add QVector<int> scores
+    highScoreForm->setScoreBoard(Init::users[this->index].scores(), true); // Need to add QVector<int> scores
     highScoreForm->show();
 }
 
-void MainWindow::leaderBoardButtonPressed(){
-    HighScoresForm *highScoreForm = new HighScoresForm();
-    //highScoreForm->setScoreBoard(scores, false); // Need to add QVector<int> scores
-    highScoreForm->show();
-}
+//void MainWindow::leaderBoardButtonPressed(){
+//    HighScoresForm *highScoreForm = new HighScoresForm();
+//    //highScoreForm->setScoreBoard(scores, false); // Need to add QVector<int> scores
+//    highScoreForm->show();
+//}
 
 void MainWindow::setUserForm(QString img, QString username){
     ui->usernameLabel->setText(username);
