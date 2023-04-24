@@ -72,6 +72,7 @@ QVector<int> User::scores(){
 }
 
 void User::write()
+
 {
     QDir currnetDir = QDir::current();
     QString filePath = currnetDir.relativeFilePath("../../../../BingChillings/users.json");
@@ -84,25 +85,27 @@ void User::write()
     QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
     QJsonArray jsonArray = doc.array();
 
-    // Write to the JSON file
-    QJsonObject json;
+    for( User &u : Init::users){
+        // Write to the JSON file
+        QJsonObject json;
 
-    json["firstName"] = this->firstName();
-    json["lastName"] = this->lastName();
-    json["dateOfBirth"] = this->dateOfBirth().toString(Qt::ISODate);
-    json["gender"] = this->gender();
-    json["profilePictureFileName"] = this->profilePictureFileName();
-    json["username"] = this->username();
-    json["password"] = this->password();
-    QJsonArray arrayOfIntsArray;
-    QVector<int> scores = this->scores();
+        json["firstName"] = u.firstName();
+        json["lastName"] = u.lastName();
+        json["dateOfBirth"] = u.dateOfBirth().toString(Qt::ISODate);
+        json["gender"] = u.gender();
+        json["profilePictureFileName"] = u.profilePictureFileName();
+        json["username"] = u.username();
+        json["password"] = u.password();
+        QJsonArray arrayOfIntsArray;
+        QVector<int> scores = u.scores();
         for (int value : scores) {
-        arrayOfIntsArray.append(value);
-    }
-    json["arrayOfInts"] = arrayOfIntsArray;
+            arrayOfIntsArray.append(value);
+        }
+        json["arrayOfInts"] = arrayOfIntsArray;
 
-    // Append the new user object to the array
-    jsonArray.append(json);
+        // Append the new user object to the array
+        jsonArray.append(json);
+    }
 
     // Write the updated JSON array back to the file
     file.seek(0); // Move the file pointer back to the beginning
