@@ -1,21 +1,39 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include "gamescene.h"
+#include <QGraphicsView>
+#include <QWidget>
+#include "user.h"
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+namespace Ui {
+class MainWindow;
+}
 
-class MainWindow : public QMainWindow
+class MainWindow : public QWidget
 {
     Q_OBJECT
+    GameScene* game_scene;
+    QGraphicsView* view;
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+
+    QVector<User> users;
+    void setUserForm(QString img, QString username);
+    void setGuestForm();
 
 private:
     Ui::MainWindow *ui;
+    void setDate();
+
+private slots:
+    void playButtonPressed();
+    void handleGameEnd(QString type, int lives, int score);
+    void highScoreButtonPressed();
+    void leaderBoardButtonPressed();
 };
+
 #endif // MAINWINDOW_H

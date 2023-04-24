@@ -2,33 +2,41 @@
 #include <QJsonDocument>
 #include <QFile>
 #include <QCryptographicHash>
+#include <QCoreApplication>
+#include <QDir>
+#include <QFileDialog>
+#include <QCoreApplication>
+#include <QDir>
+#include "init.h"
 
-// If first time creating that user put true for hashNeeded
-User::User( QString &firstName, QString &lastName, QDate &dateOfBirth, QString &gender, QString &profilePictureFileName, QString &username, QString &password, QVector<int> &arrayOfInts , bool hashNeeded) :
+
+
+User::User() :
+    firstName_(""),
+    lastName_(""),
+    dateOfBirth_(QDate()),
+    gender_(""),
+    profilePictureFileName_(""),
+    username_(""),
+    password_(""),
+    scores_(QVector<int>())
+{
+    // Default constructor implementation
+}
+
+
+User::User(QString &firstName, QString &lastName, QDate &dateOfBirth,
+           QString &gender, QString &profilePictureFileName, QString &username,
+           QString &password, QVector<int> &arrayOfInts) :
     firstName_(firstName),
     lastName_(lastName),
     dateOfBirth_(dateOfBirth),
     gender_(gender),
     profilePictureFileName_(profilePictureFileName),
+    username_(username),
+    password_(password),
     scores_(arrayOfInts)
 {
-    // If first time making user, then validate the password then hash
-    if(hashNeeded){
-        try {
-            validatePassword(password);
-            password_ = passwordHash(password);
-            // Also check username
-            validateUsername(username);
-            username_ = username;
-        } catch (const std::runtime_error &e) {
-            qDebug() << "Error:" << e.what();
-        }
-    }
-    // If reading from file then password is has already been validated and hashed
-    else{
-        password_ = password;
-        username_ = username;
-    }
 }
 
 QString User::firstName(){
@@ -51,11 +59,11 @@ QString User::profilePictureFileName(){
     return profilePictureFileName_;
 }
 
-QString User::username(){
+QString User::username() const {
     return username_;
 }
 
-QString User::password(){
+QString User::password() const {
     return password_;
 }
 
@@ -63,82 +71,48 @@ QVector<int> User::scores(){
     return scores_;
 }
 
-QVector<User> read(){
-    QVector<User> users;
-
-    QFile file("users.json");
-    QJsonArray jsonArray;
-
-    if (file.open(QIODevice::ReadOnly)){
-        QByteArray fileContent = file.readAll();
-        QJsonDocument jsonDocument = QJsonDocument::fromJson(fileContent);
-
-        if (jsonDocument.isNull()){
-            qDebug() << "Failed to parse JSON from file.";
-        }
-
-        jsonArray = jsonDocument.array();
-    }
-    else{
-        qDebug() << "Failed to open file for reading.";
+void User::write()
+{
+    QDir currnetDir = QDir::current();
+    QString filePath = currnetDir.relativeFilePath("../../../../BingChillings/users.json");
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
+        qDebug() << "write: Failed to open JSON file for reading" << file.errorString();
+        return;
     }
 
-    for (int i = 0; i < jsonArray.size(); ++i) {
-        QJsonObject json = jsonArray[i].toObject();
+    QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
+    QJsonArray jsonArray = doc.array();
 
-        QString firstName = json["firstName"].toString();
-        QString lastName = json["lastName"].toString();
-        QDate dateOfBirth = QDate::fromString(json["dateOfBirth"].toString(), Qt::ISODate);
-        QString gender = json["gender"].toString();
-        QString profilePictureFileName = json["profilePictureFileName"].toString();
-        QString username = json["username"].toString();
-        QString password = json["password"].toString();
+    // Write to the JSON file
+    QJsonObject json;
 
-        QVector<int> scores;
-        QJsonArray arrayOfIntsArray = json["arrayOfInts"].toArray();
-        for (int i = 0; i < arrayOfIntsArray.size(); ++i) {
-            scores.append(arrayOfIntsArray[i].toInt());
-        }
-
-        User user(firstName, lastName, dateOfBirth, gender, profilePictureFileName, username, password, scores, false);
-        users.append(user);
+    json["firstName"] = this->firstName();
+    json["lastName"] = this->lastName();
+    json["dateOfBirth"] = this->dateOfBirth().toString(Qt::ISODate);
+    json["gender"] = this->gender();
+    json["profilePictureFileName"] = this->profilePictureFileName();
+    json["username"] = this->username();
+    json["password"] = this->password();
+    QJsonArray arrayOfIntsArray;
+    QVector<int> scores = this->scores();
+        for (int value : scores) {
+        arrayOfIntsArray.append(value);
     }
+    json["arrayOfInts"] = arrayOfIntsArray;
 
-    return users;
+    // Append the new user object to the array
+    jsonArray.append(json);
+
+    // Write the updated JSON array back to the file
+    file.seek(0); // Move the file pointer back to the beginning
+    file.resize(0); // Clear the file contents
+    QJsonDocument updatedDoc(jsonArray);
+    file.write(updatedDoc.toJson());
+    file.close();
 }
 
-void write(QVector<User> &users){
-
-    QJsonArray jsonArray;
-
-    for (User &user : users) {
-        QJsonObject json;
-
-        json["firstName"] = user.firstName();
-        json["lastName"] = user.lastName();
-        json["dateOfBirth"] = user.dateOfBirth().toString(Qt::ISODate);
-        json["gender"] = user.gender();
-        json["profilePictureFileName"] = user.profilePictureFileName();
-        json["username"] = user.username();
-        json["password"] = user.password();
-
-        QJsonArray arrayOfIntsArray;
-        for (int value : user.scores()) {
-            arrayOfIntsArray.append(value);
-        }
-        json["arrayOfInts"] = arrayOfIntsArray;
-
-        jsonArray.append(json);
-    }
-
-    QFile file("users.json");
-    if (file.open(QIODevice::WriteOnly)){
-        QJsonDocument jsonDoc(jsonArray);
-        file.write(jsonDoc.toJson());
-    }
-}
-
-QString passwordHash(QString &password) {
+QString User::passwordHash(QString &password) {
     QByteArray passwordBytes = password.toUtf8();
 
     QCryptographicHash hasher(QCryptographicHash::Sha256);
@@ -150,66 +124,35 @@ QString passwordHash(QString &password) {
     return hashString;
 }
 
-void validatePassword(QString &password){
-    if (password.length() < 8) {
-        throw std::runtime_error("Password must be at least 8 characters long.");
-    }
 
-    bool hasCapitalLetter = false;
-    bool hasSpecialCharacter = false;
-    bool hasSpace = false;
-
-    for (QChar &ch : password) {
-        if (ch.isUpper()) {
-            hasCapitalLetter = true;
-        }
-        if (ch.isSpace()) {
-            hasSpace = true;
-        }
-        if (!ch.isLetterOrNumber()) {
-            hasSpecialCharacter = true;
-        }
-    }
-
-    if (!hasCapitalLetter) {
-        throw std::runtime_error("Password must have at least one capital letter.");
-    }
-
-    if (!hasSpecialCharacter) {
-        throw std::runtime_error("Password must have at least one special character.");
-    }
-
-    if (hasSpace) {
-        throw std::runtime_error("Password must not contain any spaces.");
-    }
-
-}
-
-void validateUsername(QString &username) {
-    if (username.length() < 3) {
-        throw std::runtime_error("Username must be at least 3 characters long.");
-    }
-
-    bool hasInvalidCharacter = false;
-
-    for (QChar &ch : username) {
-        if (!ch.isLetterOrNumber() || ch.isSpace()) {
-            hasInvalidCharacter = true;
-            break;
-        }
-    }
-
-    if (hasInvalidCharacter) {
-        throw std::runtime_error("Username must not contain special characters or spaces.");
-    }
-}
-
-//check password at login
-bool checkPassword(QString &password, User &user){
+bool User::checkPassword(QString &password, User &user){
     if (user.password() != passwordHash(password) ){
         return false;
     }else {
         return true;
     }
 }
+
+bool User::isBirthday() {
+    QDate currentDate = QDate::currentDate();
+    return currentDate.day() == dateOfBirth_.day() && currentDate.month() == dateOfBirth_.month();
+}
+
+void User::updateScore(int score)
+{
+    // Insert the new score into the scores_ QVector in descending order
+    int pos = 0;
+    while (pos < scores_.size() && scores_.at(pos) > score) {
+        ++pos;
+    }
+    scores_.insert(pos, score);
+
+    // Save the updated scores to the JSON file
+    write(); // Call the existing write() method to save the updated user data
+}
+
+
+
+
+
 
