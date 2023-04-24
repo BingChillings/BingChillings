@@ -33,7 +33,7 @@ public:
     //    void validateUsername(QString &username);
     //    bool checkPassword(QString &password, User &user);
     QString passwordHash(QString &password);
-    bool checkPassword(QString &password, User &user);
+    bool checkPassword(QString &password);
     bool isBirthday();
     void updateScore(int score);
 

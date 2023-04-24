@@ -16,7 +16,6 @@ public:
     LoginForm(QWidget *parent = nullptr);
     ~LoginForm();
 
-    QVector<User> users;
 //    void setForNewUser(const QString &username);
 
 
