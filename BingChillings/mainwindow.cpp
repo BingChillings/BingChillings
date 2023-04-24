@@ -3,8 +3,12 @@
 #include "highscoresform.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QGraphicsView>
 #include "init.h"
+#include "cake.h"
+
+#include <QGraphicsView>
+
+
 
 
 const int WINDOW_WIDTH = 1000;
@@ -24,10 +28,20 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->leaderBoardButton, &QPushButton::clicked, this, &MainWindow::leaderBoardButtonPressed);
 }
 
+
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+
+
+void MainWindow::ifBirthday()
+{
+    ui->birthdaylineEdit->setText("Happy Birthday");
+}
+
+
 
 void MainWindow::playButtonPressed(){
     game_scene = new GameScene();

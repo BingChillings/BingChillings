@@ -11,3 +11,29 @@
         }
     ]
 }
+{
+    "yutianqin": [
+        {
+            "dateOfBirth": "2000-01-01",
+            "firstName": "yutian",
+            "gender": "Male",
+            "lastName": "qin",
+            "password": "b4849287e2137d2e27f7b3dde1872bbaf3364a9812226e509ba658400a99e3a1",
+            "profilePictureFileName": ":/images/images/heart.png",
+            "username": "yutianqin"
+        }
+    ]
+}
+{
+    "tford": [
+        {
+            "dateOfBirth": "2000-01-01",
+            "firstName": "Thomas",
+            "gender": "",
+            "lastName": "Ford",
+            "password": "b4849287e2137d2e27f7b3dde1872bbaf3364a9812226e509ba658400a99e3a1",
+            "profilePictureFileName": ":/images/images/moon.png",
+            "username": "tford"
+        }
+    ]
+}

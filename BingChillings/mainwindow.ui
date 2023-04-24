@@ -46,8 +46,10 @@ color: #333;
 }
 QPushButton:hover:!pressed
 {
-border: 1px rgba(255, 138, 145, 123);
-background:rgba(255, 138, 145, 123);
+background:rgb(204, 114, 117);
+border-width:2px;
+border-color: white;
+border-style:solid;
 border-radius:9px;
 color: #333;
 }
@@ -241,6 +243,22 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <bool>true</bool>
     </property>
    </widget>
+  </widget>
+  <widget class="QLineEdit" name="birthdaylineEdit">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>190</y>
+     <width>401</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
   </widget>
  </widget>
  <resources>

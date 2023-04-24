@@ -87,7 +87,9 @@ void User::write()
     userObject["password"] = this->password();
 //    userObject["scores"] = QJsonArray::fromVector(QVector<QVariant>::fromList(this->scores()));
 
+
     QFile jsonFile("/Users/yutianqin/bingChilling/BingChillings/BingChillings/users.json");
+
     if (!QFile::exists(jsonFile.fileName())) {
         qDebug() << "write: JSON file does not exist";
         return;
@@ -100,11 +102,6 @@ void User::write()
         qDebug() << "write: Failed to open JSON file for writing" << jsonFile.errorString();
         return;
     }
-
-//    QJsonDocument jsonDocument(userObject);
-//    jsonFile.write(jsonDocument.toJson());
-//    jsonFile.close();
-
 
     // Read the existing JSON data from the file
     QJsonDocument doc = QJsonDocument::fromJson(jsonFile.readAll());

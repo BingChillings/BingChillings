@@ -15,21 +15,6 @@ NewUserWindow::NewUserWindow(QWidget *parent) :
     setupGenderBox();
     connect(ui->submitButton, &QPushButton::clicked, this, &NewUserWindow::validateFields);
     connect(ui->resetButton, &QPushButton::clicked, this, &NewUserWindow::resetFields);
-
-    // Check which profile picture did the user pick
-//    connect(ui->dogIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-//    connect(ui->carIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-//    connect(ui->catIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-//    connect(ui->heartIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-//    connect(ui->icecreamIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-//    connect(ui->monsterIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-//    connect(ui->moonIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-//    connect(ui->planeIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-//    connect(ui->starIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-//    connect(ui->sunIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-//    connect(ui->treeIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-//    connect(ui->wheatIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-//    connect(ui->submitPushButton, &QPushButton::clicked, this, &NewUserWindow::backToLogin);
 }
 
 NewUserWindow::~NewUserWindow()

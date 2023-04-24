@@ -8,6 +8,7 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <iostream>
 
 
 
@@ -47,21 +48,24 @@ void LoginForm::validateUsernamePassword()
                 ui->errorMessageLabel->setText("Wrong password");
                 return;
             }
-            else {
-                correct = true;
-            }
-        } else {
+            else correct = true;
+        }
+        else {
             ui->errorMessageLabel->setText("Cannot find the user");
             return;
         }
     }
 
-    if ( correct ) {
-        MainWindow *mainWindow = new MainWindow();
-        qDebug() << user.profilePictureFileName();
-        mainWindow->setUserForm(user.profilePictureFileName(), user.username());
-        mainWindow->show();
-    }
+//    if ( correct ) {
+//        MainWindow *mainWindow = new MainWindow();
+//        qDebug() << user.profilePictureFileName();
+//        mainWindow->setUserForm(user.profilePictureFileName(), user.username());
+//        mainWindow->show();
+//    }
+    MainWindow *mainWindow = new MainWindow();
+    qDebug() << user.profilePictureFileName();
+    mainWindow->setUserForm(user.profilePictureFileName(), user.username());
+    mainWindow->show();
 }
 
 

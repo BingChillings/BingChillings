@@ -4,6 +4,7 @@
 #include "gamescene.h"
 #include <QGraphicsView>
 #include <QWidget>
+#include <QTimer>
 #include "user.h"
 
 namespace Ui {
@@ -19,15 +20,15 @@ class MainWindow : public QWidget
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-
     QVector<User> users;
     void setUserForm(QString img, QString username);
     void setGuestForm();
+    void ifBirthday();
 
 private:
     Ui::MainWindow *ui;
     void setDate();
+
 
 private slots:
     void playButtonPressed();
