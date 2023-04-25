@@ -154,7 +154,7 @@ color:#717072;
     </rect>
    </property>
    <property name="text">
-    <string>High Scores</string>
+    <string>Resent Scores</string>
    </property>
   </widget>
   <widget class="QPushButton" name="playButton">
@@ -189,9 +189,9 @@ color:#717072;
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>90</y>
+      <y>70</y>
       <width>301</width>
-      <height>111</height>
+      <height>101</height>
      </rect>
     </property>
     <property name="readOnly">
@@ -222,6 +222,25 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </property>
     <property name="text">
      <string>Date</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>170</y>
+      <width>301</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>High Score: 700</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>

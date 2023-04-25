@@ -15,7 +15,7 @@ class HighScoresForm : public QWidget
 public:
     explicit HighScoresForm(QWidget *parent = nullptr);
 
-    void setScoreBoard(QVector<int> scores, bool user);
+    void setScoreBoard(QVector<int> scores);
 
     ~HighScoresForm();
 

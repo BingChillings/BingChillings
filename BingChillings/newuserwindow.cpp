@@ -14,21 +14,6 @@ NewUserWindow::NewUserWindow(QWidget *parent) :
     setupGenderBox();
     connect(ui->submitButton, &QPushButton::clicked, this, &NewUserWindow::validateFields);
     connect(ui->resetButton, &QPushButton::clicked, this, &NewUserWindow::resetFields);
-
-    // Check which profile picture did the user pick
-    //    connect(ui->dogIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-    //    connect(ui->carIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-    //    connect(ui->catIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-    //    connect(ui->heartIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-    //    connect(ui->icecreamIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-    //    connect(ui->monsterIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-    //    connect(ui->moonIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-    //    connect(ui->planeIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-    //    connect(ui->starIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-    //    connect(ui->sunIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-    //    connect(ui->treeIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-    //    connect(ui->wheatIconButton, &QPushButton::clicked, this, &NewUserWindow::dogProfilePic);
-    //    connect(ui->submitPushButton, &QPushButton::clicked, this, &NewUserWindow::backToLogin);
 }
 
 NewUserWindow::~NewUserWindow()
@@ -36,16 +21,12 @@ NewUserWindow::~NewUserWindow()
     delete ui;
 }
 
-
-
 void NewUserWindow::setupGenderBox(){
     ui->genderComboBox->addItem("Male");
     ui->genderComboBox->addItem("Female");
     ui->genderComboBox->addItem("Other");
     ui->genderComboBox->addItem("Prefer Not to Say");
 }
-
-
 
 void NewUserWindow::resetFields(){
     QList<QPushButton *> listIcons = ui->userIconGroup->findChildren<QPushButton *>();
@@ -96,7 +77,8 @@ void NewUserWindow::validateFields(){
 
     else if(username.length() == 0)
         ui->errorLineEdit->setText("Please enter a username");
-
+    else if (isUserNameTaken(username))
+        ui->errorLineEdit->setText("Username taken");
     else if(username.length() < 3)
         ui->errorLineEdit->setText("Username must contain more than 3 characters");
 
@@ -114,7 +96,6 @@ void NewUserWindow::validateFields(){
 
     else if (gender.isNull())
         ui->errorLineEdit->setText("Please select a gender");
-
     else
         ui->errorLineEdit->clear();
 
@@ -182,74 +163,6 @@ QString NewUserWindow::passwordHash(QString &password)
     QString hashString = hash.toHex();
 
     return hashString;
-}
-
-
-void NewUserWindow::dogProfilePic()
-{
-    QPushButton *button = this->ui->dogIconButton;
-    QIcon icon = button->icon();
-    profilePicName = icon.name();
-}
-void NewUserWindow::carProfilePic()
-{
-    QPushButton *button = this->ui->carIconButton;
-    QIcon icon = button->icon();
-    profilePicName = icon.name();
-}
-void NewUserWindow::catProfilePic()
-{
-    QPushButton *button = this->ui->catIconButton;
-    QIcon icon = button->icon();
-    profilePicName = icon.name();
-}
-void NewUserWindow::heartProfilePic()
-{
-    QPushButton *button = this->ui->heartIconButton;
-    QIcon icon = button->icon();
-    profilePicName = icon.name();
-}
-void NewUserWindow::icecreamProfilePic()
-{
-    QPushButton *button = this->ui->icecreamIconButton;
-    QIcon icon = button->icon();
-    profilePicName = icon.name();
-}
-void NewUserWindow::monsterProfilePic()
-{
-    QPushButton *button = this->ui->monsterIconButton;
-    QIcon icon = button->icon();
-    profilePicName = icon.name();
-}
-void NewUserWindow::moonProfilePic()
-{
-    QPushButton *button = this->ui->moonIconButton;
-    QIcon icon = button->icon();
-    profilePicName = icon.name();
-}
-void NewUserWindow::planeProfilePic()
-{
-    QPushButton *button = this->ui->planeIconButton;
-    QIcon icon = button->icon();
-    profilePicName = icon.name();
-}
-void NewUserWindow::starProfilePic()
-{
-    QPushButton *button = this->ui->starIconButton;
-    QIcon icon = button->icon();
-    profilePicName = icon.name();
-}
-void NewUserWindow::sunProfilePic()
-{
-    QPushButton *button = this->ui->sunIconButton;
-    QIcon icon = button->icon();
-    profilePicName = icon.name();
-}
-void NewUserWindow::treeProfilePic()
-{
-    QPushButton *button = this->ui->wheatIconButton;
-    QIcon icon = button->icon();
-    profilePicName = icon.name();
 }
 
 bool NewUserWindow::isUserNameTaken(QString &usernameRequst)

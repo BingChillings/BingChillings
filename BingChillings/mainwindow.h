@@ -17,16 +17,12 @@ class MainWindow : public QWidget
 
     QTimer *dropCakeTimer;
     QGraphicsScene *bd_scene;
-
     GameScene* game_scene;
     QGraphicsView* view;
-
-
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
 
     QVector<User> users;
     void setUserForm(QString img, QString username);
@@ -43,8 +39,6 @@ private slots:
     void playButtonPressed();
     void handleGameEnd(QString type, int lives, int score);
     void highScoreButtonPressed();
-    //void leaderBoardButtonPressed();
-
     void birthdayEffect();
 };
 

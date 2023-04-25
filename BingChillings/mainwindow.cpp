@@ -3,8 +3,6 @@
 #include "highscoresform.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QGraphicsView>
-#include <QGraphicsProxyWidget>
 #include "init.h"
 #include "cake.h"
 
@@ -52,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent) :
     setDate();
     connect(ui->playButton, &QPushButton::clicked, this, &MainWindow::playButtonPressed);
     connect(ui->highScoresButton, &QPushButton::clicked, this, &MainWindow::highScoreButtonPressed);
-//    connect(ui->leaderBoardButton, &QPushButton::clicked, this, &MainWindow::leaderBoardButtonPressed);
 }
 
 MainWindow::~MainWindow()
@@ -76,7 +73,7 @@ void MainWindow::playButtonPressed(){
 void MainWindow::handleGameEnd(QString type, int lives, int score)
 {
     view->close();
-    delete view; //might break, maybe get rid of
+    delete view;
     std::string summary;
     if(lives == 0){
         summary = "Good Try! Final Score: " + std::to_string(score);
@@ -92,15 +89,9 @@ void MainWindow::handleGameEnd(QString type, int lives, int score)
 void MainWindow::highScoreButtonPressed(){
 
     HighScoresForm *highScoreForm = new HighScoresForm();
-    highScoreForm->setScoreBoard(Init::users[index].scores(), true); // Need to add QVector<int> scores
+    highScoreForm->setScoreBoard(Init::users[index].scores()); // Need to add QVector<int> scores
     highScoreForm->show();
 }
-
-//void MainWindow::leaderBoardButtonPressed(){
-//    HighScoresForm *highScoreForm = new HighScoresForm();
-//    //highScoreForm->setScoreBoard(scores, false); // Need to add QVector<int> scores
-//    highScoreForm->show();
-//}
 
 void MainWindow::setUserForm(QString img, QString username){
     ui->usernameLabel->setText(username);
@@ -134,7 +125,6 @@ void MainWindow::ifBirthday()
     view->setAlignment(Qt::AlignLeft | Qt::AlignTop);
     view->setHorizontalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
     view->setVerticalScrollBarPolicy((Qt::ScrollBarAlwaysOff));
-//    setHappyBirthdayText(*bd_scene);
     view->setAttribute(Qt::WA_TranslucentBackground);// Set the background to transparent
     view->show();
     view->setFocus();

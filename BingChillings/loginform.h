@@ -2,7 +2,6 @@
 #define LOGINFORM_H
 
 #include <QWidget>
-#include "user.h"
 
 namespace Ui {
 class LoginForm;
@@ -15,9 +14,6 @@ class LoginForm : public QWidget
 public:
     LoginForm(QWidget *parent = nullptr);
     ~LoginForm();
-
-//    void setForNewUser(const QString &username);
-
 
 private:
     Ui::LoginForm *ui;
